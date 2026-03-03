@@ -1412,39 +1412,38 @@
 
     <!-- Hero Slider Section -->
     <section class="w-full bg-white">
-        <div id="heroSlider" class="relative w-full h-[680px] md:h-[760px] overflow-hidden">
+        <div id="heroSlider" class="relative w-full h-screen overflow-hidden">
             <!-- Slide 1 -->
             <div class="hero-slide hero-light active absolute inset-0 w-full h-full" data-hero-index="0">
-                <div class="w-full h-full flex flex-col items-center justify-start pt-6 md:pt-10 bg-[#f5f5f7]">
-                    <div class="w-full h-[45%] md:h-[52%] overflow-hidden flex items-start justify-center">
-                        <img
-                            src="./hero3imgs/Home-Page.webp"
-                            alt="Hero Slide"
-                            class="w-[128%] md:w-[112%] max-w-none object-contain -translate-y-4 md:-translate-y-6"
-                        />
-                    </div>
+                <img
+                    src="./hero3imgs/Home-Page.webp"
+                    alt="Hero Slide"
+                    class="absolute inset-0 w-full h-full object-cover"
+                />
+                <!-- Gradient overlay on bottom 30% -->
+                <!-- <div class="absolute inset-0 bg-gradient-to-t from-white/95 via-white/70 to-transparent"></div> -->
+                
+                <!-- Text overlay positioned at bottom -->
+                <div class="absolute inset-x-0 bottom-0 w-full h-[35%] z-10 flex flex-col items-center justify-center text-center px-4 md:px-6">
+                    <h1 style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif; font-weight: 600; font-size: 48px; line-height: 52px; letter-spacing: -0.28px; color: #1D1D1F; margin: 0;">
+                        Revive the Magic.<br>
+                        Rediscover the Power.
+                    </h1>
 
-                    <div class="w-full h-[55%] md:h-[48%] z-10 display-inline flex flex-col items-center text-center px-4 md:px-6 pt-0 md:pt-2">
-                        <h1 style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif; font-weight: 600; font-size: 56px; line-height: 60px; letter-spacing: -0.28px; color: #1D1D1F; margin: 0;">
-                            Revive the Magic.<br>
-                            Rediscover the Power.
-                        </h1>
+                    <p style="max-width: 920px; margin-top: 10px; margin-bottom: 0; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif; font-weight: 400; font-size: 16px; line-height: 24px; letter-spacing: 0.2px; color: #1D1D1F;">
+                        Your Apple devices are designed to last. Whether you need expert restoration or the<br>
+                        latest innovation, we bring your ecosystem back to life. Seamless service. Genuine<br>
+                        parts. The experience you expect, preserved.
+                    </p>
 
-                        <p style="max-width: 920px; margin-top: 14px; margin-bottom: 0; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif; font-weight: 400; font-size: 18px; line-height: 26px; letter-spacing: 0.2px; color: #1D1D1F;">
-                            Your Apple devices are designed to last. Whether you need expert restoration or the<br>
-                            latest innovation, we bring your ecosystem back to life. Seamless service. Genuine<br>
-                            parts. The experience you expect, preserved.
-                        </p>
+                    <div class="flex gap-4 mt-4">
+                        <a href="#" class="px-8 py-3 rounded-full text-white font-medium transition-all hover:opacity-90" style="background:#0071E3; font-size: 17px;">
+                            Book a Service
+                        </a>
 
-                        <div class="flex gap-4 mt-7">
-                            <a href="#" class="px-8 py-3 rounded-full text-white font-medium transition-all hover:opacity-90" style="background:#0071E3; font-size: 17px;">
-                                Book a Service
-                            </a>
-
-                            <a href="#" class="px-8 py-3 rounded-full font-medium transition-all hover:bg-blue-50" style="border:1.5px solid #0071E3; color:#0071E3; font-size: 17px;">
-                                Shop Latest Products
-                            </a>
-                        </div>
+                        <a href="#" class="px-8 py-3 rounded-full font-medium transition-all hover:bg-blue-50" style="border:1.5px solid #0071E3; color:#0071E3; font-size: 17px;">
+                            Shop Latest Products
+                        </a>
                     </div>
                 </div>
             </div>
