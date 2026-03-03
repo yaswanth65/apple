@@ -1,26 +1,88 @@
 // Initialize Icons
 lucide.createIcons();
 
-// Slider functionality - only initialize if elements exist
+// Main DOMContentLoaded Handler
 document.addEventListener('DOMContentLoaded', () => {
-    const slider = document.getElementById('serviceSlider');
-    const nextBtn = document.getElementById('nextBtn');
-    const prevBtn = document.getElementById('prevBtn');
+    // Hero Slider functionality
+    const slides = document.querySelectorAll('.hero-slide');
+    let currentSlide = 0;
+    let heroIntervalId = null;
+    const slideInterval = 3000;
 
-    if (slider && nextBtn && prevBtn) {
-        const cardWidth = 392; // 372px card + 20px gap
+    function showSlide(index) {
+        if (!slides.length) return;
 
-        nextBtn.addEventListener('click', () => {
-            slider.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        currentSlide = (index + slides.length) % slides.length;
+
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === currentSlide);
         });
 
-        prevBtn.addEventListener('click', () => {
-            slider.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-        });
     }
-});
-// Note: Mega Menu Hover Functionality is now handled in index.html inline script
-document.addEventListener('DOMContentLoaded', () => {
+
+    function nextSlide() {
+        showSlide(currentSlide + 1);
+    }
+
+    function startHeroAutoplay() {
+        if (heroIntervalId) {
+            clearInterval(heroIntervalId);
+        }
+        heroIntervalId = setInterval(nextSlide, slideInterval);
+    }
+
+    if (slides.length > 1) {
+        showSlide(0);
+        startHeroAutoplay();
+    } else if (slides.length === 1) {
+        showSlide(0);
+    }
+
+    // Service Section Scroll Functionality (Enhanced)
+    const serviceScrollContainer = document.getElementById('service-scroll-area') || document.getElementById('service-scroll-container');
+    const serviceButtons = [
+        { left: document.getElementById('service-scroll-left-bottom'), right: document.getElementById('service-scroll-right-bottom') }
+    ];
+
+    if (serviceScrollContainer) {
+        const scrollAmount = 392; // Card width (372px) + gap (20px)
+
+        serviceButtons.forEach(buttonSet => {
+            if (buttonSet.left && buttonSet.right) {
+                buttonSet.left.addEventListener('click', () => {
+                    serviceScrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                });
+
+                buttonSet.right.addEventListener('click', () => {
+                    serviceScrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                });
+            }
+        });
+
+        // Update button states based on scroll position
+        const updateButtonStates = () => {
+            const isAtStart = serviceScrollContainer.scrollLeft <= 0;
+            const isAtEnd = serviceScrollContainer.scrollLeft >= 
+                (serviceScrollContainer.scrollWidth - serviceScrollContainer.clientWidth - 10);
+
+            serviceButtons.forEach(buttonSet => {
+                if (buttonSet.left) {
+                    buttonSet.left.style.opacity = isAtStart ? '0.5' : '1';
+                    buttonSet.left.style.pointerEvents = isAtStart ? 'none' : 'auto';
+                }
+                if (buttonSet.right) {
+                    buttonSet.right.style.opacity = isAtEnd ? '0.5' : '1';
+                    buttonSet.right.style.pointerEvents = isAtEnd ? 'none' : 'auto';
+                }
+            });
+        };
+
+        serviceScrollContainer.addEventListener('scroll', updateButtonStates);
+        updateButtonStates(); // Initial state
+    }
+
+    // Note: Mega Menu Hover Functionality is now handled in index.html inline script
+    // Scroll reveal animations
     const reveals = document.querySelectorAll('.reveal');
 
     const revealOptions = {
@@ -54,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Color swatch image switcher for Shop iPhone cards
     const swatches = document.querySelectorAll('.color-swatch');
     swatches.forEach(s => {
-        s.addEventListener('click', (e) => {
+        const applySwatch = (e) => {
             const btn = e.currentTarget;
             const imgUrl = btn.dataset.image;
             const card = btn.closest('.product-card');
@@ -62,12 +124,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const img = card.querySelector('.product-img');
             if (!img) return;
             img.src = imgUrl;
+            card.dataset.selected = imgUrl;
 
             // update active state
             const siblings = card.querySelectorAll('.color-swatch');
-            siblings.forEach(x => x.classList.remove('ring-2', 'ring-offset-1', 'ring-apple-blue'));
-            btn.classList.add('ring-2', 'ring-offset-1', 'ring-apple-blue');
-        });
+            siblings.forEach(x => x.classList.remove('active', 'ring-2', 'ring-offset-1', 'ring-apple-blue'));
+            btn.classList.add('active');
+        };
+
+        s.addEventListener('click', applySwatch);
+        s.addEventListener('mouseenter', applySwatch);
     });
 
     // Optionally set first swatch active on each card
@@ -75,41 +141,4 @@ document.addEventListener('DOMContentLoaded', () => {
         const first = card.querySelector('.color-swatch');
         if (first) first.click();
     });
-
-    // Service Section Scroll Functionality
-    const serviceScrollContainer = document.getElementById('service-scroll-container');
-    const serviceScrollLeftBtn = document.getElementById('service-scroll-left');
-    const serviceScrollRightBtn = document.getElementById('service-scroll-right');
-
-    if (serviceScrollContainer && serviceScrollLeftBtn && serviceScrollRightBtn) {
-        const scrollAmount = 392; // Card width (372px) + gap (20px)
-
-        serviceScrollLeftBtn.addEventListener('click', () => {
-            serviceScrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-        });
-
-        serviceScrollRightBtn.addEventListener('click', () => {
-            serviceScrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        });
-
-        // Update button states based on scroll position
-        const updateButtonStates = () => {
-            const isAtStart = serviceScrollContainer.scrollLeft <= 0;
-            const isAtEnd = serviceScrollContainer.scrollLeft >= 
-                (serviceScrollContainer.scrollWidth - serviceScrollContainer.clientWidth - 10);
-
-            // Visual feedback: disable/enable buttons
-            serviceScrollLeftBtn.style.opacity = isAtStart ? '0.5' : '1';
-            serviceScrollLeftBtn.style.pointerEvents = isAtStart ? 'none' : 'auto';
-            
-            serviceScrollRightBtn.style.opacity = isAtEnd ? '0.5' : '1';
-            serviceScrollRightBtn.style.pointerEvents = isAtEnd ? 'none' : 'auto';
-        };
-
-        // Initial check
-        updateButtonStates();
-
-        // Update on scroll
-        serviceScrollContainer.addEventListener('scroll', updateButtonStates);
-    }
 });
