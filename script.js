@@ -1,61 +1,8 @@
 // Initialize Icons
 lucide.createIcons();
 
-// Mega Menu Hover Functionality
+// Note: Mega Menu Hover Functionality is now handled in index.html inline script
 document.addEventListener('DOMContentLoaded', () => {
-    const megaMenu = document.getElementById('mega-menu');
-    const navButtons = document.querySelectorAll('[data-menu]');
-    const menuPanels = document.querySelectorAll('.mega-submenu');
-
-    const closePanels = () => menuPanels.forEach(panel => panel.classList.add('hidden'));
-
-    const openMenuForType = (menuType) => {
-        if (!menuType) return;
-        closePanels();
-        const menuElement = document.getElementById(`${menuType}-menu`);
-        if (menuElement) {
-            menuElement.classList.remove('hidden');
-            megaMenu.style.maxHeight = '400px';
-            megaMenu.classList.remove('pointer-events-none');
-        }
-    };
-
-    // Show mega menu on hover / click
-    navButtons.forEach(button => {
-        const handleOpen = () => openMenuForType(button.dataset.menu);
-        button.addEventListener('mouseenter', handleOpen);
-        button.addEventListener('click', event => {
-            event.preventDefault();
-            handleOpen();
-        });
-        button.addEventListener('focus', handleOpen);
-    });
-
-    // Keep menu open when hovering over the mega menu itself
-    megaMenu.addEventListener('mouseenter', () => {
-        megaMenu.style.maxHeight = '400px';
-        megaMenu.classList.remove('pointer-events-none');
-    });
-
-    // Hide menu when leaving navbar and mega menu
-    const navbar = document.getElementById('navbar');
-    navbar.addEventListener('mouseleave', () => {
-        setTimeout(() => {
-            if (!megaMenu.matches(':hover')) {
-                megaMenu.style.maxHeight = '0px';
-                megaMenu.classList.add('pointer-events-none');
-                closePanels();
-            }
-        }, 100);
-    });
-
-    megaMenu.addEventListener('mouseleave', () => {
-        megaMenu.style.maxHeight = '0px';
-        megaMenu.classList.add('pointer-events-none');
-        closePanels();
-    });
-
-    // Magic Scroll Reveal Animation
     const reveals = document.querySelectorAll('.reveal');
 
     const revealOptions = {

@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,37 +46,73 @@
         }
     </script>
     <script>
-        // Navbar Mega Menu Hover Handler
+        // Navbar Mega Menu Hover Handler with Blur Effect
         document.addEventListener('DOMContentLoaded', () => {
             const megaMenu = document.getElementById('mega-menu');
+            const blurBackdrop = document.getElementById('blur-backdrop');
             const navbar = document.getElementById('navbar');
             const navButtons = document.querySelectorAll('[data-menu]');
             let menuTimeout;
 
             function openMenu(menuType) {
-                // Hide all submenus
-                document.querySelectorAll('.mega-submenu').forEach(m => m.classList.add('hidden'));
+                // Clear any pending close timeout
+                clearTimeout(menuTimeout);
                 
+                // Remove active class from all submenus
+                document.querySelectorAll('.mega-submenu').forEach(m => m.classList.remove('active'));
+
                 // Show selected menu
                 const targetMenu = document.getElementById(menuType + '-menu');
                 if (targetMenu) {
-                    targetMenu.classList.remove('hidden');
-                    megaMenu.style.maxHeight = '500px';
+                    // Add active class to show content
+                    targetMenu.classList.add('active');
+                    
+                    // Enable pointer events and expand menu
                     megaMenu.classList.remove('pointer-events-none');
+                    
+                    // Force reflow to ensure transition works
+                    void megaMenu.offsetHeight;
+                    
+                    // Set max-height to show all content
+                    megaMenu.style.maxHeight = '700px';
+                    
+                    // Show blur backdrop with transition
+                    blurBackdrop.classList.remove('hidden');
+                    void blurBackdrop.offsetHeight;
+                    blurBackdrop.classList.remove('opacity-0');
+                    
+                    console.log('Menu opened:', menuType);
                 }
             }
 
             function closeMenu() {
-                megaMenu.style.maxHeight = '0px';
-                megaMenu.classList.add('pointer-events-none');
                 clearTimeout(menuTimeout);
+                
+                // Reset menu height
+                megaMenu.style.maxHeight = '0px';
+                
+                // Disable pointer events
+                megaMenu.classList.add('pointer-events-none');
+                
+                // Hide blur backdrop with fade transition
+                blurBackdrop.classList.add('opacity-0');
+                
+                // Hide after transition
+                setTimeout(() => {
+                    blurBackdrop.classList.add('hidden');
+                }, 300);
+                
+                // Remove active from all submenus
+                document.querySelectorAll('.mega-submenu').forEach(m => m.classList.remove('active'));
+                
+                console.log('Menu closed');
             }
 
             // Handle button hover
             navButtons.forEach(btn => {
                 btn.addEventListener('mouseenter', (e) => {
-                    clearTimeout(menuTimeout);
-                    const menuType = e.target.dataset.menu;
+                    const menuType = e.currentTarget.dataset.menu;
+                    console.log('Hovering on:', menuType);
                     openMenu(menuType);
                 });
             });
@@ -85,20 +122,31 @@
                 clearTimeout(menuTimeout);
             });
 
-            // Close menu on leave from navbar or mega menu
+            // Close menu on leave from navbar
             navbar.addEventListener('mouseleave', () => {
-                menuTimeout = setTimeout(closeMenu, 200);
+                menuTimeout = setTimeout(() => {
+                    if (!megaMenu.matches(':hover')) {
+                        closeMenu();
+                    }
+                }, 150);
             });
 
+            // Close menu on leave from mega menu
             megaMenu.addEventListener('mouseleave', () => {
-                closeMenu();
+                menuTimeout = setTimeout(closeMenu, 150);
             });
 
-            // Close on click outside
+            // Close on click outside (excluding backdrop)
             document.addEventListener('click', (e) => {
                 if (!navbar.contains(e.target) && !megaMenu.contains(e.target)) {
                     closeMenu();
                 }
+            });
+
+            // Close when clicking on blur backdrop
+            blurBackdrop.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeMenu();
             });
         });
 
@@ -169,15 +217,16 @@
             overflow-x: hidden;
             line-height: 1.6;
         }
-        
+
         /* ===== SCROLLBAR STYLING ===== */
-        .hide-scrollbar::-webkit-scrollbar { 
+        .hide-scrollbar::-webkit-scrollbar {
             height: 8px;
             display: none;
         }
-        .hide-scrollbar { 
-            -ms-overflow-style: none; 
-            scrollbar-width: none; 
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
             scroll-behavior: smooth;
         }
 
@@ -192,14 +241,17 @@
             box-shadow: none !important;
             padding: 0;
         }
+
         .color-swatch:focus {
             outline: none !important;
             box-shadow: none !important;
         }
+
         .color-swatch.active {
             transform: scale(1.12);
             box-shadow: none !important;
         }
+
         .color-swatch-row {
             -webkit-overflow-scrolling: touch;
             justify-content: center;
@@ -211,22 +263,34 @@
             transform: translateY(32px);
             transition: all 0.85s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
-        .reveal-delay-1 { transition-delay: 0.15s; }
-        .reveal-delay-2 { transition-delay: 0.3s; }
-        .reveal-delay-3 { transition-delay: 0.45s; }
+
+        .reveal-delay-1 {
+            transition-delay: 0.15s;
+        }
+
+        .reveal-delay-2 {
+            transition-delay: 0.3s;
+        }
+
+        .reveal-delay-3 {
+            transition-delay: 0.45s;
+        }
 
         /* ===== TYPOGRAPHY SYSTEM ===== */
         .sf-hero-h1 {
             font-weight: 600;
             font-size: 56px;
-            line-height: 60px; /* match design: 56px font, 60px line */
+            line-height: 60px;
+            /* match design: 56px font, 60px line */
             letter-spacing: -0.28px;
             color: #1D1D1F;
         }
+
         .sf-hero-sub {
             font-weight: 400;
             font-size: 18px;
@@ -234,28 +298,34 @@
             letter-spacing: 0.196px;
             color: #424245;
         }
-        
+
         .sf-mac-h2 {
             font-weight: 700;
             font-size: 56px;
-            line-height: 60px; /* precise 60px to match spec */
+            line-height: 60px;
+            /* precise 60px to match spec */
             letter-spacing: -0.28px;
             color: #F5F5F7;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
+
         .sf-mac-sub {
             font-weight: 400;
             font-size: 28px;
-            line-height: 32px; /* 28px font with 32px line-height per spec */
+            line-height: 32px;
+            /* 28px font with 32px line-height per spec */
             letter-spacing: 0.196px;
             color: #F5F5F7;
         }
+
         .sf-mac-p {
             font-weight: 500;
             font-size: 23.0625px;
-            line-height: 28px; /* explicit px line-height from spec */
+            line-height: 28px;
+            /* explicit px line-height from spec */
             letter-spacing: 0.216px;
-            color: rgba(255, 255, 255, 0.65); /* 65% white as in spec */
+            color: rgba(255, 255, 255, 0.65);
+            /* 65% white as in spec */
         }
 
         .sf-section-eyebrow {
@@ -267,6 +337,7 @@
             text-transform: uppercase;
             vertical-align: middle;
         }
+
         .sf-section-h2 {
             font-weight: 700;
             font-size: 54.14px;
@@ -284,6 +355,7 @@
             color: #BF4800;
             text-transform: uppercase;
         }
+
         .sf-card-title {
             font-weight: 700;
             font-size: 17px;
@@ -291,6 +363,7 @@
             letter-spacing: -0.374px;
             color: #1D1D1F;
         }
+
         .sf-card-price {
             font-weight: 400;
             font-size: 14px;
@@ -298,15 +371,16 @@
             letter-spacing: -0.224px;
             color: #86868B;
         }
-        
+
         .sf-airpods-h3 {
             font-weight: 700;
             font-size: 56px;
             line-height: 1;
             letter-spacing: -0.576px;
             color: #F5F5F7;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
+
         .sf-airpods-sub {
             font-weight: 500;
             font-size: 17px;
@@ -321,13 +395,14 @@
             line-height: 1.19;
             letter-spacing: 0.196px;
         }
-        
+
         .sf-button-text {
             font-weight: 500;
             font-size: 17px;
             line-height: 1.18;
             letter-spacing: -0.374px;
         }
+
         .sf-link-text {
             font-weight: 400;
             font-size: 17px;
@@ -348,9 +423,11 @@
             text-align: center;
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
         }
+
         .sf-stats-h3-wide {
             letter-spacing: 0.231px;
         }
+
         .sf-stats-p {
             font-weight: 400;
             font-size: 21px;
@@ -362,6 +439,7 @@
             text-align: center;
             font-family: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
         }
+
         .sf-stats-link {
             font-weight: 400;
             font-size: 21px;
@@ -391,20 +469,23 @@
             cursor: pointer;
             box-shadow: 0 1px 3px rgba(0, 113, 227, 0.15);
         }
-        .btn-primary:hover { 
+
+        .btn-primary:hover {
             background-color: #0077ED;
             box-shadow: 0 4px 12px rgba(0, 113, 227, 0.25);
             transform: translateY(-2px);
         }
-        .btn-primary:active { 
+
+        .btn-primary:active {
             transform: scale(0.98);
             box-shadow: 0 2px 6px rgba(0, 113, 227, 0.2);
         }
+
         .btn-primary:focus {
             outline: 2px solid #0071E3;
             outline-offset: 2px;
         }
-        
+
         .btn-secondary {
             border: 1.5px solid #D5D5D7;
             color: #0071E3;
@@ -419,16 +500,19 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
         }
-        .btn-secondary:hover { 
+
+        .btn-secondary:hover {
             background-color: #0071E3;
             color: #FFFFFF;
             border-color: #0071E3;
             box-shadow: 0 4px 12px rgba(0, 113, 227, 0.2);
             transform: translateY(-2px);
         }
-        .btn-secondary:active { 
+
+        .btn-secondary:active {
             transform: scale(0.98);
         }
+
         .btn-secondary:focus {
             outline: 2px solid #0071E3;
             outline-offset: 2px;
@@ -436,14 +520,16 @@
 
         /* ===== HOVER & INTERACTION EFFECTS ===== */
         .hover-lift {
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                        border-color 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s ease;
         }
+
         .hover-lift:hover {
             transform: translateY(-4px);
             box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
         }
+
         .hover-lift:active {
             transform: translateY(-1px);
         }
@@ -455,6 +541,7 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
         .product-card:hover {
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
         }
@@ -464,15 +551,16 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1),
-                        0 1px 3px rgba(0,0,0,0.08);
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1),
+                0 1px 3px rgba(0, 0, 0, 0.08);
             transition: all 0.2s ease;
             cursor: pointer;
         }
+
         .swatch:hover {
             transform: scale(1.25);
-            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.15),
-                        0 2px 6px rgba(0,0,0,0.15);
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15),
+                0 2px 6px rgba(0, 0, 0, 0.15);
         }
 
         /* ===== NAVBAR ENHANCEMENTS ===== */
@@ -480,6 +568,7 @@
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0);
             transition: all 0.3s ease;
         }
+
         #navbar.shadow-sm {
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
@@ -488,10 +577,24 @@
             transition: color 0.2s ease, text-decoration 0.2s ease;
         }
 
+        /* Mega Menu Specific Styles */
+        #mega-menu {
+            will-change: max-height;
+        }
+
+        .mega-submenu {
+            display: none !important;
+        }
+
+        .mega-submenu.active {
+            display: grid !important;
+        }
+
         /* ===== IMAGE OVERLAYS ===== */
         .overlay-gradient {
             position: relative;
         }
+
         .overlay-gradient::after {
             content: '';
             position: absolute;
@@ -499,7 +602,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 100%);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 100%);
             transition: opacity 0.3s ease;
         }
 
@@ -508,27 +611,182 @@
             position: relative;
         }
 
+        /* ===== UNIFORM CARD SECTION LAYOUT SYSTEM ===== */
+        .card-section {
+            width: 100%;
+            padding: 80px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .card-section-container {
+            width: 100%;
+            max-width: 1440px;
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+
+        .card-section-header {
+            width: 100%;
+            margin-bottom: 64px;
+            padding-left: 0;
+        }
+
+        .card-section-scroll {
+            width: 100%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding-bottom: 20px;
+            scroll-padding-left: 40px;
+            padding-top: 8px;
+            display: flex;
+            gap: 20px;
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+
+        .card-section-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .card-section {
+                padding: 60px 0;
+            }
+
+            .card-section-container {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .card-section-header {
+                margin-bottom: 48px;
+            }
+
+            .card-section-scroll {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card-section {
+                padding: 50px 0;
+            }
+
+            .card-section-container {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .card-section-scroll {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
+        /* Uniform card styles */
+        .uniform-card {
+            border-radius: 18px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            flex-shrink: 0;
+            scroll-snap-align: start;
+        }
+
+        .uniform-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            transform: translateY(-2px);
+        }
+
+        /* Uniform service card layout */
+        .service-section {
+            padding: 80px 0;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            border-bottom: 1px solid #E5E5E7;
+        }
+
+        .service-section-container {
+            width: 100%;
+            max-width: 1440px;
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+
+        .service-cards-scroll {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            gap: 20px;
+            padding-bottom: 20px;
+            padding-top: 8px;
+        }
+
+        .service-cards-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .service-section {
+                padding: 60px 0;
+            }
+
+            .service-section-container {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .service-section {
+                padding: 50px 0;
+            }
+
+            .service-section-container {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+
         /* ===== CUSTOM SCROLLBAR (Optional - visible) ===== */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: #F5F5F7;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #BFBFBF;
             border-radius: 4px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #88888A;
         }
 
         /* ===== RESPONSIVE TYPOGRAPHY ===== */
         /* Responsive styles removed - Desktop only */
-        
+
         /* ===== GLOBAL TAG STYLES ===== */
-        p, span, a, li, button {
+        p,
+        span,
+        a,
+        li,
+        button {
             font-weight: 600;
             font-size: 17px;
             line-height: 21px;
@@ -537,421 +795,473 @@
         }
     </style>
 </head>
+
 <body class="bg-white">
 
     <!-- Navbar -->
-    <nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-lg border-b border-gray-200 h-12 flex items-center transition-all duration-300" id="navbar">
-    <div class="max-w-[1440px] w-full mx-auto px-8 flex justify-between items-center text-xs font-medium text-gray-800/75">
-        <a href="#" class="hover:text-black transition duration-200 flex-shrink-0">
-            <i data-lucide="apple" class="w-4 h-4 stroke-[2]"></i>
-        </a>
-        <div class="flex space-x-8" id="nav-links">
-            <button type="button" data-menu="store" class="hover:text-black transition duration-200 outline-none cursor-pointer text-gray-700">Store</button>
-            <button type="button" data-menu="mac" class="hover:text-black transition duration-200 outline-none cursor-pointer text-gray-700">Mac</button>
-            <button type="button" data-menu="ipad" class="hover:text-black transition duration-200 outline-none cursor-pointer text-gray-700">iPad</button>
-            <button type="button" data-menu="iphone" class="hover:text-black transition duration-200 outline-none cursor-pointer text-gray-700">iPhone</button>
-            <button type="button" data-menu="watch" class="hover:text-black transition duration-200 outline-none cursor-pointer text-gray-700">Watch</button>
-            <button type="button" data-menu="airpods" class="hover:text-black transition duration-200 outline-none cursor-pointer text-gray-700">AirPods</button>
-            <button type="button" data-menu="support" class="hover:text-black transition duration-200 outline-none cursor-pointer text-gray-700">Support</button>
+    <nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-lg border-b border-gray-200 h-12 flex items-center transition-all duration-300"
+        id="navbar">
+        <div
+            class="max-w-[1440px] w-full mx-auto px-8 flex justify-between items-center text-xs font-medium text-gray-800/75">
+            <a href="#" class="hover:text-black transition duration-200 flex-shrink-0 font-bold text-lg">
+                IHDM INDIA
+            </a>
+            <div class="flex space-x-8" id="nav-links">
+                <button type="button" data-menu="store"
+                    class="hover:text-black transition duration-200 outline-none cursor-pointer text-gray-700">Store</button>
+                <button type="button" data-menu="mac"
+                    class="hover:text-black transition duration-200 outline-none cursor-pointer text-gray-700">Mac</button>
+                <button type="button" data-menu="ipad"
+                    class="hover:text-black transition duration-200 outline-none cursor-pointer text-gray-700">iPad</button>
+                <button type="button" data-menu="iphone"
+                    class="hover:text-black transition duration-200 outline-none cursor-pointer text-gray-700">iPhone</button>
+                <button type="button" data-menu="watch"
+                    class="hover:text-black transition duration-200 outline-none cursor-pointer text-gray-700">Watch</button>
+                <button type="button" data-menu="airpods"
+                    class="hover:text-black transition duration-200 outline-none cursor-pointer text-gray-700">AirPods</button>
+                <button type="button" data-menu="support"
+                    class="hover:text-black transition duration-200 outline-none cursor-pointer text-gray-700">Support</button>
+            </div>
+            <div class="flex items-center space-x-5">
+                <a href="#" class="hover:text-black transition duration-200" aria-label="Search">
+                    <i data-lucide="search" class="w-4 h-4 stroke-[2]"></i>
+                </a>
+                <a href="#" class="hover:text-black transition duration-200 relative" aria-label="Shopping bag">
+                    <i data-lucide="shopping-bag" class="w-4 h-4 stroke-[2]"></i>
+                </a>
+            </div>
         </div>
-        <div class="flex items-center space-x-5">
-            <a href="#" class="hover:text-black transition duration-200" aria-label="Search">
-                <i data-lucide="search" class="w-4 h-4 stroke-[2]"></i>
-            </a>
-            <a href="#" class="hover:text-black transition duration-200 relative" aria-label="Shopping bag">
-                <i data-lucide="shopping-bag" class="w-4 h-4 stroke-[2]"></i>
-            </a>
+    </nav>
+
+    <!-- Blur backdrop for mega menu -->
+    <div id="blur-backdrop"
+        class="fixed top-0 left-0 w-full h-full bg-black/20 backdrop-blur-sm z-30 hidden transition-opacity duration-300 ease-in-out opacity-0"
+        style="pointer-events: auto;">
+    </div>
+
+    <div id="mega-menu"
+        class="fixed top-12 left-0 w-full bg-white z-40 max-h-0 overflow-hidden transition-all duration-300 ease-in-out shadow-sm pointer-events-none"
+        style="max-height: 0px; transition: max-height 0.3s ease-in-out;">
+        <div class="w-full px-8 py-10 border-b border-gray-200">
+            <div class="max-w-[1440px] mx-auto grid grid-cols-4 gap-8" id="menu-content">
+
+                <!-- Store Menu -->
+                <div id="store-menu" class="col-span-4 grid grid-cols-4 gap-8 mega-submenu">
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Shop</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">Latest Products</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">New Arrivals</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Refurbished</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Trade In</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Services</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">AppleCare+</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Financing</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Repair Service</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Gift Cards</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Quick Links</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">Featured Deals</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Special Offers</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Education</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Business</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Bundles</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">Mac + iPhone</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">iPad Bundle</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Accessories</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Student Deals</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Mac Menu -->
+                <div id="mac-menu" class="col-span-4 grid grid-cols-4 gap-8 mega-submenu">
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Explore</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">All Mac Products</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">MacBook Air</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">MacBook Pro</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">iMac</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Mac mini</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Mac Studio</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Shop</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">Shop Mac</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Mac Accessories</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Keyboards & Mice</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Displays</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Storage</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Services</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">AppleCare+ for Mac</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Tech Support</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Trade In</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Financing</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Compare</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">Compare All Mac</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">MacBook Comparison</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Performance</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Specs</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- iPad Menu -->
+                <div id="ipad-menu" class="col-span-4 grid grid-cols-4 gap-8 mega-submenu">
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Explore</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">All iPad</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">iPad Pro</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">iPad Air</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">iPad</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">iPad mini</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Shop</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">Shop iPad</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">iPad Cases</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">iPad Keyboards</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Apple Pencil</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Accessories</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Services</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">AppleCare+ for iPad</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Tech Support</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Trade In</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Financing</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Resources</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">iPadOS Info</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Education</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Business</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Creative Apps</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- iPhone Menu -->
+                <div id="iphone-menu" class="col-span-4 grid grid-cols-4 gap-8 mega-submenu">
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Explore</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">All iPhone</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">iPhone 16 Pro</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">iPhone 16</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">iPhone 15</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">iPhone SE</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Shop</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">Shop iPhone</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Cases</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Screen Protectors</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Chargers</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">More Accessories</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Services</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">AppleCare+</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">iPhone Upgrade</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Data Transfer</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Trade In</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Resources</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">Repair Service</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Support</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">iOS Updates</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Compare Models</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Watch Menu -->
+                <div id="watch-menu" class="col-span-4 grid grid-cols-4 gap-8 mega-submenu">
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Explore</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">All Apple Watch</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Watch Series 10</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Watch Ultra</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Watch SE</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Shop</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">Shop Watch</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Bands</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Chargers</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Screen Protectors</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Services</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">AppleCare+</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Repair Service</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Trade In</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Financing</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Resources</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">watchOS</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Health & Fitness</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Tips & Support</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Compare Models</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- AirPods Menu -->
+                <div id="airpods-menu" class="col-span-4 grid grid-cols-4 gap-8 mega-submenu">
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Explore</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">All AirPods</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">AirPods Pro</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">AirPods Max</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">AirPods 4</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Shop</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">Shop AirPods</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Ear Tips</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Cases</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Charging Cases</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Services</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">AppleCare+</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Repair & Support</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Setup Help</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Troubleshooting</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Resources</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">Audio Technology</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Spatial Audio</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Compare Models</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Tips</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Support Menu -->
+                <div id="support-menu" class="col-span-4 grid grid-cols-4 gap-8 mega-submenu">
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Get Help</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">Apple Support</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Contact Support</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Check Status</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Repair Service</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Manuals</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">Mac Manuals</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">iPhone Manuals</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">iPad Manuals</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Watch Manuals</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Service & Repair</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">Repair Options</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">AppleCare+</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Trade In Program</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Recycling</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Community</h3>
+                        <ul class="space-y-2 text-gray-800 text-sm">
+                            <li><a href="#" class="hover:text-blue-600 transition">Discussions</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Communities</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Feedback</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Updates</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
-</nav>
 
-<div id="mega-menu" class="fixed top-12 left-0 w-full bg-white z-40 max-h-0 overflow-hidden transition-all duration-300 ease-in-out shadow-sm pointer-events-none" style="transition: max-height 0.3s ease-in-out;">
-    <div class="w-full px-8 py-10 border-b border-gray-200">
-        <div class="max-w-[1440px] mx-auto grid grid-cols-4 gap-8" id="menu-content">
-            
-            <!-- Store Menu -->
-            <div id="store-menu" class="col-span-4 grid grid-cols-4 gap-8 hidden mega-submenu">
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Shop</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">Latest Products</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">New Arrivals</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Refurbished</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Trade In</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Services</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">AppleCare+</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Financing</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Repair Service</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Gift Cards</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Quick Links</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">Featured Deals</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Special Offers</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Education</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Business</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Bundles</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">Mac + iPhone</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">iPad Bundle</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Accessories</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Student Deals</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Mac Menu -->
-            <div id="mac-menu" class="col-span-4 grid grid-cols-4 gap-8 hidden mega-submenu">
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Explore</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">All Mac Products</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">MacBook Air</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">MacBook Pro</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">iMac</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Mac mini</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Mac Studio</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Shop</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">Shop Mac</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Mac Accessories</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Keyboards & Mice</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Displays</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Storage</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Services</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">AppleCare+ for Mac</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Tech Support</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Trade In</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Financing</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Compare</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">Compare All Mac</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">MacBook Comparison</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Performance</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Specs</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- iPad Menu -->
-            <div id="ipad-menu" class="col-span-4 grid grid-cols-4 gap-8 hidden mega-submenu">
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Explore</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">All iPad</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">iPad Pro</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">iPad Air</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">iPad</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">iPad mini</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Shop</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">Shop iPad</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">iPad Cases</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">iPad Keyboards</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Apple Pencil</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Accessories</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Services</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">AppleCare+ for iPad</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Tech Support</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Trade In</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Financing</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Resources</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">iPadOS Info</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Education</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Business</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Creative Apps</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- iPhone Menu -->
-            <div id="iphone-menu" class="col-span-4 grid grid-cols-4 gap-8 hidden mega-submenu">
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Explore</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">All iPhone</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">iPhone 16 Pro</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">iPhone 16</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">iPhone 15</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">iPhone SE</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Shop</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">Shop iPhone</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Cases</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Screen Protectors</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Chargers</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">More Accessories</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Services</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">AppleCare+</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">iPhone Upgrade</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Data Transfer</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Trade In</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Resources</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">Repair Service</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Support</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">iOS Updates</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Compare Models</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Watch Menu -->
-            <div id="watch-menu" class="col-span-4 grid grid-cols-4 gap-8 hidden mega-submenu">
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Explore</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">All Apple Watch</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Watch Series 10</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Watch Ultra</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Watch SE</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Shop</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">Shop Watch</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Bands</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Chargers</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Screen Protectors</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Services</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">AppleCare+</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Repair Service</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Trade In</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Financing</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Resources</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">watchOS</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Health & Fitness</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Tips & Support</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Compare Models</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- AirPods Menu -->
-            <div id="airpods-menu" class="col-span-4 grid grid-cols-4 gap-8 hidden mega-submenu">
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Explore</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">All AirPods</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">AirPods Pro</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">AirPods Max</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">AirPods 4</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Shop</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">Shop AirPods</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Ear Tips</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Cases</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Charging Cases</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Services</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">AppleCare+</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Repair & Support</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Setup Help</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Troubleshooting</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Resources</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">Audio Technology</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Spatial Audio</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Compare Models</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Tips</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Support Menu -->
-            <div id="support-menu" class="col-span-4 grid grid-cols-4 gap-8 hidden mega-submenu">
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Get Help</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">Apple Support</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Contact Support</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Check Status</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Repair Service</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Manuals</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">Mac Manuals</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">iPhone Manuals</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">iPad Manuals</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Watch Manuals</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Service & Repair</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">Repair Options</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">AppleCare+</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Trade In Program</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Recycling</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Community</h3>
-                    <ul class="space-y-2 text-gray-800 text-sm">
-                        <li><a href="#" class="hover:text-blue-600 transition">Discussions</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Communities</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Feedback</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition">Updates</a></li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
- 
 
     <!-- Hero 1: Floating Phones -->
     <!-- Hero Section -->
-<section class="w-full h-screen bg-white flex flex-col items-center overflow-hidden">
+=    <section class="w-full h-screen bg-white flex flex-col items-center overflow-hidden">
 
-            <div class="w-full h-full flex flex-col items-center justify-center pt-8">
-                
-                <div class="w-screen max-h-96 flex items-center justify-center overflow-visible flex-shrink-0">
-                    <div 
-                        class="w-full max-w-[1200px] h-80 md:h-96 bg-no-repeat bg-center bg-contain"
-                        style="background-image: url('media/hero.png');
-                               background-size: 100% auto;"
-                    ></div>
+        <div class="w-full h-full flex flex-col items-center justify-center pt-8">
+
+            <!-- Image Wrapper -->
+            <div class="w-screen max-h-96 flex items-center justify-center overflow-visible flex-shrink-0 relative">
+
+                <!-- Background Image -->
+                <div class="w-full max-w-[1250px] h-90 md:h-96 bg-no-repeat bg-center bg-contain" style="background-image: url('media/hero.png');
+                       background-size: 100% auto;">
                 </div>
 
-                <div class="w-full flex flex-col items-center justify-center text-center px-6 mt-4 pb-8 flex-shrink-0 relative z-10">
+            </div>
 
-                    <h1 style="
-                        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
-                        font-weight: 600;
-                        font-size: 56px;
-                        line-height: 60px;
-                        letter-spacing: -0.28px;
-                        color: #1D1D1F;
-                        margin: 0;
-                    ">
-                        Revive the Magic.<br>
-                        Rediscover the Power.
-                    </h1>
+            <!-- Text Content (Moved Up & Above Image) -->
+            <div
+                class="w-full flex flex-col items-center justify-center text-center px-6 -mt-16 pb-8 flex-shrink-0 relative z-20">
 
-                    <p style="
-                        max-width: 700px;
-                        margin-top: 12px;
-                        margin-bottom: 0;
-                        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
-                        font-weight: 400;
-                        font-size: 18px;
-                        line-height: 26px;
-                        letter-spacing: 0.2px;
-                        color: #1D1D1F;
-                    ">
-                        Your Apple devices are designed to last. Whether you need expert restoration or the latest innovation, we bring your ecosystem back to life. Seamless service. Genuine parts. The experience you expect, preserved.
-                    </p>
+                <h1 style="
+                font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+                font-weight: 600;
+                font-size: 56px;
+                line-height: 60px;
+                letter-spacing: -0.28px;
+                color: #1D1D1F;
+                margin: 0;
+            ">
+                    Revive the Magic.<br>
+                    Rediscover the Power.
+                </h1>
 
-                    <div class="flex gap-4 mt-6">
+                <p style="
+                max-width: 700px;
+                margin-top: 12px;
+                margin-bottom: 0;
+                font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 26px;
+                letter-spacing: 0.2px;
+                color: #1D1D1F;
+            ">
+                    Your Apple devices are designed to last. Whether you need expert restoration or the latest
+                    innovation, we bring your ecosystem back to life. Seamless service. Genuine parts. The experience
+                    you expect, preserved.
+                </p>
 
-                        <a href="#"
-                           class="px-6 py-3 rounded-full text-white text-[17px] transition-all duration-300 flex-shrink-0"
-                           style="background:#0071E3;">
-                            Book a Service
-                        </a>
+                <div class="flex gap-4 mt-6">
 
-                        <a href="#"
-                           class="px-6 py-3 rounded-full text-[17px] border transition-all duration-300 flex-shrink-0"
-                           style="border:1px solid #2997FF; color:#2997FF;">
-                            Shop Latest Products
-                        </a>
+                    <a href="#"
+                        class="px-6 py-3 font-light rounded-full text-white text-[17px] transition-all duration-300"
+                        style="background:#0071E3;">
+                        Book a Service
+                    </a>
 
-                    </div>
+                    <a href="#" class="px-6 py-3 font-light rounded-full text-[17px] border transition-all duration-300"
+                        style="border:1px solid #2997FF; color:#2997FF;">
+                        Shop Latest Products
+                    </a>
 
                 </div>
 
             </div>
-        </section>
 
-        <section class="relative w-full h-screen bg-black flex flex-col items-center justify-center overflow-hidden">
-    
-    <div class="absolute inset-0 w-full h-full">
-        <img src="https://images.unsplash.com/photo-1511707267537-b85faf00021e?auto=format&fit=crop&q=80&w=1600" 
-             class="w-full h-full object-cover object-center opacity-90"
-             alt="iPhone 16 Pro Hero">
-        <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
-    </div>
-
-    <div class="relative z-10 flex mt-[300px] flex-col items-center gap-[20px] px-6 text-center" style="max-width:660px;">
-
-        <p style="font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',sans-serif;font-weight:700;font-size:56px;line-height:60px;letter-spacing:-0.28px;color:#F5F5F7;margin:0;">iPhone 16 Pro</p>
-
-        <p style="font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',sans-serif;font-weight:400;font-size:28px;line-height:34px;letter-spacing:0.196px;color:#F5F5F7;margin:0;">Mind-blowing. Head-turning.</p>
-
-        <p style="font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;font-weight:400;font-size:17px;line-height:25px;letter-spacing:0.2px;color:rgba(255,255,255,0.8);margin:0;max-width:560px;">Power that doesn’t just keep up, it sets the pace. With the M3 chips, it handles the most demanding workflows with a quiet confidence. It’s not just a laptop; it’s a workspace that moves as fast as your imagination.</p>
-
-        <div class="flex flex-row items-center gap-[12px]" style="margin-top:4px;">
-            <a href="#" style="display:inline-flex;align-items:center;justify-content:center;background:#0071E3;color:#fff;border-radius:980px;padding:0 20px;height:44px;font-size:17px;font-weight:400;letter-spacing:-0.374px;border:1px solid transparent;text-decoration:none;">Learn more</a>
-            <a href="#" style="display:inline-flex;align-items:center;justify-content:center;background:transparent;color:#fff;border-radius:980px;padding:0 20px;height:44px;font-size:17px;font-weight:400;letter-spacing:-0.374px;border:1px solid rgba(255,255,255,0.7);text-decoration:none;">Buy</a>
         </div>
+
+    </section>
+   <section class="bg-[#f5f5f7] py-[80px] flex flex-col items-center overflow-hidden">
+
+  <!-- Heading -->
+  <div class="w-full max-w-[1440px] pl-[108px] mb-[64px]">
+    <div class="sf-section-eyebrow">Shop iPhone.</div>
+    <div class="sf-section-h2">
+      Designed to be loved.
     </div>
+  </div>
+
+  <!-- Scroll Area -->
+  <div class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-[20px] scroll-pl-[108px]">
+    
+    <div class="flex w-max gap-[24px] pl-[108px]">
+
+      <!-- Editorial Card -->
+      <div class="w-[420px] h-[500px] rounded-[18px] overflow-hidden flex-shrink-0 snap-start shadow-md hover:shadow-xl transition duration-300">
+        <img src="media/editorial.jpg"
+             class="w-full h-full object-cover" />
+      </div>
+
+      <!-- Product Card -->
+      <div class="w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300">
+
+        <!-- IMAGE AREA -->
+        <div class="h-[320px] bg-gray-50 flex items-center justify-center rounded-t-[18px]">
+          <img src="https://images.unsplash.com/photo-1526040652367-ac003a0475fe?auto=format&fit=crop&q=80&w=800"
+               class="h-[240px] object-contain transition duration-500 hover:scale-105" />
+        </div>
+
+        <!-- CONTENT -->
+        <div class="flex flex-col px-6 py-6 flex-1">
+          <span class="text-[12px] text-[#BF4800] mb-2">New</span>
+
+          <h3 class="text-[18px] font-semibold text-[#1D1D1F]">
+            iPhone 17 Pro
+          </h3>
+
+          <p class="text-[14px] text-gray-600 mb-4">
+            All out Pro.
+          </p>
+
+          <p class="text-[14px] font-medium text-[#1D1D1F] mt-auto">
+            From ₹ 1,34,900
+          </p>
+        </div>
+      </div>
+
+      <!-- Duplicate cards normally -->
+      
+    </div>
+  </div>
+
 </section>
     <!-- Hero 2: MacBook Pro -->
-    
-    <!-- Section: Designed to be loved (Shop iPhone) -->
-   <section class="bg-[#f5f5f7] py-[80px] flex flex-col items-center overflow-hidden">
+ <section class="bg-[#f5f5f7] py-[80px] flex flex-col items-center overflow-hidden">
   <div class="w-full max-w-[1440px] pl-[40px]  mb-[64px]">
 
     <!-- Heading -->
@@ -965,7 +1275,7 @@
   </div>
 
     <!-- Scroll Container -->
-    <div class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-[20px] scroll-pl-[90px] pt-2 reveal reveal-delay-1 px-[90px] flex gap-[20px]">
+    <div class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-[20px] scroll-pl-[90px] pt-2 reveal reveal-delay-1 pl-[90px] flex gap-[20px]">
 
       <!-- ✅ FIRST CARD (ONLY IMAGE, FULL COVER) -->
       <div class="w-[400px] h-[500px] rounded-[18px] overflow-hidden flex-shrink-0 snap-start shadow-md hover:shadow-xl transition duration-300">
