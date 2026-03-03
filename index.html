@@ -217,7 +217,7 @@
             overflow-x: hidden;
             line-height: 1.6;
         }
-        
+
         /* Hero Slider Styles */
         .hero-slide {
             opacity: 0;
@@ -462,24 +462,24 @@
             padding: 0;
             position: relative;
         }
-        
+
         .color-swatch:focus {
             outline: none !important;
             box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.18) !important;
         }
-        
+
         .color-swatch:hover {
             transform: scale(1.2);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
             z-index: 1;
         }
-        
+
         .color-swatch.active {
             transform: scale(1.25);
             box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 3px 12px rgba(0, 0, 0, 0.25) !important;
             border-color: rgba(0, 0, 0, 0.35) !important;
         }
-        
+
         .color-swatch-row {
             -webkit-overflow-scrolling: touch;
             justify-content: center;
@@ -1412,32 +1412,36 @@
 
     <!-- Hero Slider Section -->
     <section class="w-full bg-white">
-        <div id="heroSlider" class="relative w-full h-screen overflow-hidden">
-
+        <div id="heroSlider" class="relative w-full h-[680px] md:h-[760px] overflow-hidden">
             <!-- Slide 1 -->
-            <div class="hero-slide hero-light active absolute inset-0" data-hero-index="0">
-                <div class="w-full h-full flex flex-col items-center justify-center pt-8">
-                    <div class="w-screen max-h-96 flex items-center justify-center overflow-visible flex-shrink-0 mt-8">
-                        <div class="w-full max-w-[1280px] h-80 md:h-96 bg-no-repeat bg-center bg-contain"
-                            style="background-image: url('./hero3imgs/Home-Page.png'); background-size: 112% auto;"></div>
+            <div class="hero-slide hero-light active absolute inset-0 w-full h-full" data-hero-index="0">
+                <div class="w-full h-full flex flex-col items-center justify-start pt-6 md:pt-10 bg-[#f5f5f7]">
+                    <div class="w-full h-[45%] md:h-[52%] overflow-hidden flex items-start justify-center">
+                        <img
+                            src="./hero3imgs/Home-Page.png"
+                            alt="Hero Slide"
+                            class="w-[128%] md:w-[112%] max-w-none object-contain -translate-y-4 md:-translate-y-6"
+                        />
                     </div>
 
-                    <div class="w-full flex flex-col items-center justify-center text-center px-6 -mt-4 pb-8 flex-shrink-0 relative z-10">
+                    <div class="w-full h-[55%] md:h-[48%] z-10 display-inline flex flex-col items-center text-center px-4 md:px-6 pt-0 md:pt-2">
                         <h1 style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif; font-weight: 600; font-size: 56px; line-height: 60px; letter-spacing: -0.28px; color: #1D1D1F; margin: 0;">
                             Revive the Magic.<br>
                             Rediscover the Power.
                         </h1>
 
-                        <p style="max-width: 700px; margin-top: 12px; margin-bottom: 0; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif; font-weight: 400; font-size: 18px; line-height: 26px; letter-spacing: 0.2px; color: #1D1D1F;">
-                            Your Apple devices are designed to last. Whether you need expert restoration or the latest innovation, we bring your ecosystem back to life. Seamless service. Genuine parts. The experience you expect, preserved.
+                        <p style="max-width: 920px; margin-top: 14px; margin-bottom: 0; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif; font-weight: 400; font-size: 18px; line-height: 26px; letter-spacing: 0.2px; color: #1D1D1F;">
+                            Your Apple devices are designed to last. Whether you need expert restoration or the<br>
+                            latest innovation, we bring your ecosystem back to life. Seamless service. Genuine<br>
+                            parts. The experience you expect, preserved.
                         </p>
 
-                        <div class="flex gap-4 mt-6">
-                            <a href="#" class="px-6 py-3 rounded-full text-white text-[17px] transition-all duration-300 flex-shrink-0" style="background:#0071E3;">
+                        <div class="flex gap-4 mt-7">
+                            <a href="#" class="px-8 py-3 rounded-full text-white font-medium transition-all hover:opacity-90" style="background:#0071E3; font-size: 17px;">
                                 Book a Service
                             </a>
 
-                            <a href="#" class="px-6 py-3 rounded-full text-[17px] border transition-all duration-300 flex-shrink-0" style="border:1px solid #2997FF; color:#2997FF;">
+                            <a href="#" class="px-8 py-3 rounded-full font-medium transition-all hover:bg-blue-50" style="border:1.5px solid #0071E3; color:#0071E3; font-size: 17px;">
                                 Shop Latest Products
                             </a>
                         </div>
@@ -1449,10 +1453,13 @@
             <div class="hero-slide hero-dark absolute inset-0" data-hero-index="1">
                 <img src="./hero3imgs/Homepage 2.png" alt="Hero Slide 2" class="hero-bg" />
                 <div class="hero-overlay"></div>
-                <div class="hero-copy-wrap relative z-10 flex flex-col items-center gap-[20px] px-6" style="max-width:660px; margin: 0 auto 0;">
+                <div class="hero-copy-wrap relative z-10 flex flex-col items-center gap-[20px] px-6"
+                    style="max-width:660px; margin: 0 auto 0;">
                     <p class="hero-dark-title">MacBook Pro</p>
                     <p class="hero-dark-subtitle">Mind-blowing. Head-turning.</p>
-                    <p class="hero-dark-desc">Power that doesn't just keep up, it sets the pace. With the M3 chips, it handles the most demanding workflows with a quiet confidence. It's not just a laptop; it's a workspace that moves as fast as your imagination.</p>
+                    <p class="hero-dark-desc">Power that doesn't just keep up, it sets the pace. With the M3 chips, it
+                        handles the most demanding workflows with a quiet confidence. It's not just a laptop; it's a
+                        workspace that moves as fast as your imagination.</p>
                     <div class="hero-btns">
                         <a href="#" class="btn-primary sf-button-text cta-primary">Learn more</a>
                         <a href="#" class="btn-secondary sf-button-text cta-secondary">Buy</a>
@@ -1464,10 +1471,12 @@
             <div class="hero-slide hero-dark absolute inset-0" data-hero-index="2">
                 <img src="./hero3imgs/apple_airpods_max_8.jpg.jpeg" alt="Hero Slide 3" class="hero-bg" />
                 <div class="hero-overlay"></div>
-                <div class="hero-copy-wrap relative z-10 flex flex-col items-center gap-[20px] px-6" style="max-width:660px; margin: 0 auto 0;">
+                <div class="hero-copy-wrap relative z-10 flex flex-col items-center gap-[20px] px-6"
+                    style="max-width:660px; margin: 0 auto 0;">
                     <p class="hero-dark-title">AirPods Max</p>
                     <p class="hero-dark-subtitle">Immersive sound. Premium comfort.</p>
-                    <p class="hero-dark-desc">A complete over-ear listening experience with high-fidelity audio, active noise cancellation, and all-day comfort that blends style with performance.</p>
+                    <p class="hero-dark-desc">A complete over-ear listening experience with high-fidelity audio, active
+                        noise cancellation, and all-day comfort that blends style with performance.</p>
                     <div class="hero-btns">
                         <a href="#" class="btn-primary sf-button-text cta-primary">Learn more</a>
                         <a href="#" class="btn-secondary sf-button-text cta-secondary">Buy</a>
@@ -1491,20 +1500,30 @@
             <div class="flex w-max gap-[24px] pl-[108px] pr-[108px]">
 
                 <!-- Editorial Card -->
-                <div class="w-[420px] h-[500px] rounded-[18px] overflow-hidden flex-shrink-0 snap-start shadow-sm hover:shadow-md transition duration-300">
+                <div
+                    class="w-[420px] h-[500px] rounded-[18px] overflow-hidden flex-shrink-0 snap-start shadow-sm hover:shadow-md transition duration-300">
                     <img src="./imgdrive/shopiphone.png" class="w-full h-full object-cover" alt="Shop iPhone" />
                 </div>
 
                 <!-- Product Card: iPhone 17 Pro -->
-                <div class="product-card w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300" data-selected="./imgdrive/Iphone/17pro/iphone17procosmicorange.webp">
+                <div class="product-card w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300"
+                    data-selected="./imgdrive/Iphone/17pro/iphone17procosmicorange.webp">
                     <div class="h-[320px] bg-gray-50 flex items-center justify-center rounded-t-[18px]">
-                        <img src="./imgdrive/Iphone/17pro/iphone17procosmicorange.webp" class="product-img h-[240px] object-contain transition duration-500 hover:scale-105" alt="iPhone 17 Pro" />
+                        <img src="./imgdrive/Iphone/17pro/iphone17procosmicorange.webp"
+                            class="product-img h-[240px] object-contain transition duration-500 hover:scale-105"
+                            alt="iPhone 17 Pro" />
                     </div>
                     <div class="flex flex-col px-6 py-6 flex-1">
                         <div class="flex justify-center items-center gap-2 mb-3 color-swatch-row">
-                            <div class="color-swatch rounded-full" style="background:#FC8030" data-image="./imgdrive/Iphone/17pro/iphone17procosmicorange.webp" aria-label="iPhone 17 Pro Cosmic Orange"></div>
-                            <div class="color-swatch rounded-full" style="background:#2A334A" data-image="./imgdrive/Iphone/17pro/iphone17problue.webp" aria-label="iPhone 17 Pro Blue"></div>
-                            <div class="color-swatch rounded-full" style="background:#E9E9E7" data-image="./imgdrive/Iphone/17pro/iphone17prosilver.webp" aria-label="iPhone 17 Pro Silver"></div>
+                            <div class="color-swatch rounded-full" style="background:#FC8030"
+                                data-image="./imgdrive/Iphone/17pro/iphone17procosmicorange.webp"
+                                aria-label="iPhone 17 Pro Cosmic Orange"></div>
+                            <div class="color-swatch rounded-full" style="background:#2A334A"
+                                data-image="./imgdrive/Iphone/17pro/iphone17problue.webp"
+                                aria-label="iPhone 17 Pro Blue"></div>
+                            <div class="color-swatch rounded-full" style="background:#E9E9E7"
+                                data-image="./imgdrive/Iphone/17pro/iphone17prosilver.webp"
+                                aria-label="iPhone 17 Pro Silver"></div>
                         </div>
                         <span class="sf-card-new mb-2">New</span>
                         <h3 class="sf-card-title mb-1">iPhone 17 Pro</h3>
@@ -1514,17 +1533,27 @@
                 </div>
 
                 <!-- Product Card: iPhone 17 -->
-                <div class="product-card w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300" data-selected="./imgdrive/Iphone/17/iphone17black.webp">
+                <div class="product-card w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300"
+                    data-selected="./imgdrive/Iphone/17/iphone17black.webp">
                     <div class="h-[320px] bg-gray-50 flex items-center justify-center rounded-t-[18px]">
-                        <img src="./imgdrive/Iphone/17/iphone17black.webp" class="product-img h-[240px] object-contain transition duration-500 hover:scale-105" alt="iPhone 17" />
+                        <img src="./imgdrive/Iphone/17/iphone17black.webp"
+                            class="product-img h-[240px] object-contain transition duration-500 hover:scale-105"
+                            alt="iPhone 17" />
                     </div>
                     <div class="flex flex-col px-6 py-6 flex-1">
                         <div class="flex justify-center items-center gap-2 mb-3 color-swatch-row">
-                            <div class="color-swatch rounded-full" style="background:#25292F" data-image="./imgdrive/Iphone/17/iphone17black.webp" aria-label="iPhone 17 Black"></div>
-                            <div class="color-swatch rounded-full" style="background:#D5D4DF" data-image="./imgdrive/Iphone/17/iphone17lavender.webp" aria-label="iPhone 17 Lavender"></div>
-                            <div class="color-swatch rounded-full" style="background:#C8D7E8" data-image="./imgdrive/Iphone/17/iphone17mistblue.webp" aria-label="iPhone 17 Mist Blue"></div>
-                            <div class="color-swatch rounded-full" style="background:#CED6B9" data-image="./imgdrive/Iphone/17/iphone17sage.webp" aria-label="iPhone 17 Sage"></div>
-                            <div class="color-swatch rounded-full" style="background:#F4F4F2" data-image="./imgdrive/Iphone/17/iphone17white.webp" aria-label="iPhone 17 White"></div>
+                            <div class="color-swatch rounded-full" style="background:#25292F"
+                                data-image="./imgdrive/Iphone/17/iphone17black.webp" aria-label="iPhone 17 Black"></div>
+                            <div class="color-swatch rounded-full" style="background:#D5D4DF"
+                                data-image="./imgdrive/Iphone/17/iphone17lavender.webp" aria-label="iPhone 17 Lavender">
+                            </div>
+                            <div class="color-swatch rounded-full" style="background:#C8D7E8"
+                                data-image="./imgdrive/Iphone/17/iphone17mistblue.webp"
+                                aria-label="iPhone 17 Mist Blue"></div>
+                            <div class="color-swatch rounded-full" style="background:#CED6B9"
+                                data-image="./imgdrive/Iphone/17/iphone17sage.webp" aria-label="iPhone 17 Sage"></div>
+                            <div class="color-swatch rounded-full" style="background:#F4F4F2"
+                                data-image="./imgdrive/Iphone/17/iphone17white.webp" aria-label="iPhone 17 White"></div>
                         </div>
                         <span class="sf-card-new mb-2">New</span>
                         <h3 class="sf-card-title mb-1">iPhone 17</h3>
@@ -1534,17 +1563,30 @@
                 </div>
 
                 <!-- Product Card: iPhone 17 Max -->
-                <div class="product-card w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300" data-selected="./imgdrive/Iphone/17/iphone17mistblue.webp">
+                <div class="product-card w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300"
+                    data-selected="./imgdrive/Iphone/17/iphone17mistblue.webp">
                     <div class="h-[320px] bg-gray-50 flex items-center justify-center rounded-t-[18px]">
-                        <img src="./imgdrive/Iphone/17/iphone17mistblue.webp" class="product-img h-[240px] object-contain transition duration-500 hover:scale-105" alt="iPhone 17 Max" />
+                        <img src="./imgdrive/Iphone/17/iphone17mistblue.webp"
+                            class="product-img h-[240px] object-contain transition duration-500 hover:scale-105"
+                            alt="iPhone 17 Max" />
                     </div>
                     <div class="flex flex-col px-6 py-6 flex-1">
                         <div class="flex justify-center items-center gap-2 mb-3 color-swatch-row">
-                            <div class="color-swatch rounded-full" style="background:#7A3D2C" data-image="./imgdrive/Iphone/17pro/iphone17procosmicorange.webp" aria-label="iPhone 17 Max Orange"></div>
-                            <div class="color-swatch rounded-full" style="background:#284958" data-image="./imgdrive/Iphone/17/iphone17sage.webp" aria-label="iPhone 17 Max Green"></div>
-                            <div class="color-swatch rounded-full" style="background:#25292F" data-image="./imgdrive/Iphone/17/iphone17black.webp" aria-label="iPhone 17 Max Black"></div>
-                            <div class="color-swatch rounded-full" style="background:#565B62" data-image="./imgdrive/Iphone/17pro/iphone17problue.webp" aria-label="iPhone 17 Max Blue"></div>
-                            <div class="color-swatch rounded-full" style="background:#FC8030" data-image="./imgdrive/Iphone/17pro/iphone17procosmicorange.webp" aria-label="iPhone 17 Max Orange Alt"></div>
+                            <div class="color-swatch rounded-full" style="background:#7A3D2C"
+                                data-image="./imgdrive/Iphone/17pro/iphone17procosmicorange.webp"
+                                aria-label="iPhone 17 Max Orange"></div>
+                            <div class="color-swatch rounded-full" style="background:#284958"
+                                data-image="./imgdrive/Iphone/17/iphone17sage.webp" aria-label="iPhone 17 Max Green">
+                            </div>
+                            <div class="color-swatch rounded-full" style="background:#25292F"
+                                data-image="./imgdrive/Iphone/17/iphone17black.webp" aria-label="iPhone 17 Max Black">
+                            </div>
+                            <div class="color-swatch rounded-full" style="background:#565B62"
+                                data-image="./imgdrive/Iphone/17pro/iphone17problue.webp"
+                                aria-label="iPhone 17 Max Blue"></div>
+                            <div class="color-swatch rounded-full" style="background:#FC8030"
+                                data-image="./imgdrive/Iphone/17pro/iphone17procosmicorange.webp"
+                                aria-label="iPhone 17 Max Orange Alt"></div>
                         </div>
                         <span class="sf-card-new mb-2">New</span>
                         <h3 class="sf-card-title mb-1">iPhone 17 Max</h3>
@@ -1561,108 +1603,111 @@
 
     <!-- Section: Discover Mac -->
     <!-- Section: Discover Mac -->
-<section class="bg-white py-[80px] flex flex-col overflow-hidden">
+    <section class="bg-white py-[80px] flex flex-col overflow-hidden">
 
-  <!-- Heading -->
+        <!-- Heading -->
         <div class="w-full pl-[108px] pr-[108px] mb-[64px]">
-    <div class="reveal">
-      <div class="sf-section-eyebrow">Discover Mac.</div>
-      <div class="sf-section-h2">
-        Power without limits.
-      </div>
-    </div>
-  </div>
-
-  <!-- Scroll Area -->
-  <div class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-[20px] scroll-pl-[108px]">
-
-    <div class="flex w-max gap-[24px] pl-[108px] pr-[108px] pt-2 reveal reveal-delay-1">
-
-      <!-- ✅ FIRST CARD (MATCHES IPHONE SECTION SIZE) -->
-      <div class="w-[420px] h-[500px] rounded-[18px] overflow-hidden flex-shrink-0 snap-start shadow-sm hover:shadow-md transition duration-300">
-        <img src="./imgdrive/discovermac.png"
-             class="w-full h-full object-cover" />
-      </div>
-
-      <!-- ✅ PRODUCT CARD -->
-      <div class="w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300 product-card">
-
-        <div class="h-[320px] bg-gray-50 flex items-center justify-center rounded-t-[18px]">
-          <img src="./imgdrive/macstudio.webp"
-               class="h-[240px] object-contain transition duration-500 hover:scale-105" />
+            <div class="reveal">
+                <div class="sf-section-eyebrow">Discover Mac.</div>
+                <div class="sf-section-h2">
+                    Power without limits.
+                </div>
+            </div>
         </div>
 
-        <div class="flex flex-col px-6 py-6 flex-1">
-          <span class="text-[12px] text-[#BF4800] mb-2">New</span>
+        <!-- Scroll Area -->
+        <div class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-[20px] scroll-pl-[108px]">
 
-          <h3 class="text-[18px] font-semibold text-[#1D1D1F]">
-            Mac Studio
-          </h3>
+            <div class="flex w-max gap-[24px] pl-[108px] pr-[108px] pt-2 reveal reveal-delay-1">
 
-          <p class="text-[14px] text-gray-600 mb-4">
-            More power to you.
-          </p>
+                <!-- ✅ FIRST CARD (MATCHES IPHONE SECTION SIZE) -->
+                <div
+                    class="w-[420px] h-[500px] rounded-[18px] overflow-hidden flex-shrink-0 snap-start shadow-sm hover:shadow-md transition duration-300">
+                    <img src="./imgdrive/discovermac.png" class="w-full h-full object-cover" />
+                </div>
 
-          <p class="text-[14px] font-medium text-[#1D1D1F] mt-auto">
-            From ₹ 4,29,900
-          </p>
+                <!-- ✅ PRODUCT CARD -->
+                <div
+                    class="w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300 product-card">
+
+                    <div class="h-[320px] bg-gray-50 flex items-center justify-center rounded-t-[18px]">
+                        <img src="./imgdrive/macstudio.webp"
+                            class="h-[240px] object-contain transition duration-500 hover:scale-105" />
+                    </div>
+
+                    <div class="flex flex-col px-6 py-6 flex-1">
+                        <span class="text-[12px] text-[#BF4800] mb-2">New</span>
+
+                        <h3 class="text-[18px] font-semibold text-[#1D1D1F]">
+                            Mac Studio
+                        </h3>
+
+                        <p class="text-[14px] text-gray-600 mb-4">
+                            More power to you.
+                        </p>
+
+                        <p class="text-[14px] font-medium text-[#1D1D1F] mt-auto">
+                            From ₹ 4,29,900
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ✅ PRODUCT CARD 2 -->
+                <div
+                    class="w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300 product-card">
+
+                    <div class="h-[320px] bg-gray-50 flex items-center justify-center rounded-t-[18px]">
+                        <img src="./imgdrive/macbookpro.webp"
+                            class="h-[240px] object-contain transition duration-500 hover:scale-105" />
+                    </div>
+
+                    <div class="flex flex-col px-6 py-6 flex-1">
+                        <span class="text-[12px] text-[#BF4800] mb-2">New</span>
+
+                        <h3 class="text-[18px] font-semibold text-[#1D1D1F]">
+                            MacBook Pro M5
+                        </h3>
+
+                        <p class="text-[14px] text-gray-600 mb-4">
+                            Supercharged by M5.
+                        </p>
+
+                        <p class="text-[14px] font-medium text-[#1D1D1F] mt-auto">
+                            From ₹ 1,59,900
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ✅ PRODUCT CARD 3 -->
+                <div
+                    class="w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300 product-card">
+
+                    <div class="h-[320px] bg-gray-50 flex items-center justify-center rounded-t-[18px]">
+                        <img src="./imgdrive/macbookair.webp"
+                            class="h-[240px] object-contain transition duration-500 hover:scale-105" />
+                    </div>
+
+                    <div class="flex flex-col px-6 py-6 flex-1">
+                        <span class="text-[12px] text-[#BF4800] mb-2">New</span>
+
+                        <h3 class="text-[18px] font-semibold text-[#1D1D1F]">
+                            MacBook Air
+                        </h3>
+
+                        <p class="text-[14px] text-gray-600 mb-4">
+                            Built for Apple Intelligence.
+                        </p>
+
+                        <p class="text-[14px] font-medium text-[#1D1D1F] mt-auto">
+                            From ₹ 99,900
+                        </p>
+                    </div>
+                </div>
+
+            </div>
         </div>
-      </div>
 
-      <!-- ✅ PRODUCT CARD 2 -->
-      <div class="w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300 product-card">
-
-        <div class="h-[320px] bg-gray-50 flex items-center justify-center rounded-t-[18px]">
-          <img src="./imgdrive/macbookpro.webp"
-               class="h-[240px] object-contain transition duration-500 hover:scale-105" />
-        </div>
-
-        <div class="flex flex-col px-6 py-6 flex-1">
-          <span class="text-[12px] text-[#BF4800] mb-2">New</span>
-
-          <h3 class="text-[18px] font-semibold text-[#1D1D1F]">
-            MacBook Pro M5
-          </h3>
-
-          <p class="text-[14px] text-gray-600 mb-4">
-            Supercharged by M5.
-          </p>
-
-          <p class="text-[14px] font-medium text-[#1D1D1F] mt-auto">
-            From ₹ 1,59,900
-          </p>
-        </div>
-      </div>
-
-      <!-- ✅ PRODUCT CARD 3 -->
-      <div class="w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300 product-card">
-
-        <div class="h-[320px] bg-gray-50 flex items-center justify-center rounded-t-[18px]">
-          <img src="./imgdrive/macbookair.webp"
-               class="h-[240px] object-contain transition duration-500 hover:scale-105" />
-        </div>
-
-        <div class="flex flex-col px-6 py-6 flex-1">
-          <span class="text-[12px] text-[#BF4800] mb-2">New</span>
-
-          <h3 class="text-[18px] font-semibold text-[#1D1D1F]">
-            MacBook Air
-          </h3>
-
-          <p class="text-[14px] text-gray-600 mb-4">
-            Built for Apple Intelligence.
-          </p>
-
-          <p class="text-[14px] font-medium text-[#1D1D1F] mt-auto">
-            From ₹ 99,900
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-</section>
+    </section>
 
     <section class="relative w-full min-h-screen flex flex-col items-center overflow-hidden pt-24">
 
@@ -1670,8 +1715,7 @@
 
             <div class="flex flex-col items-center gap-[24px]">
 
-                <img src="./imgdrive/watchseries%2010.png"
-                    alt="Apple Watch Series 10" class="w-[284px] h-auto block">
+                <img src="./imgdrive/watchseries%2010.png" alt="Apple Watch Series 10" class="w-[284px] h-auto block">
 
                 <p class="text-[#6E6E73] font-medium text-[23px] leading-[1.21] tracking-[0.216px] max-w-[606px]"
                     style="font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;">
@@ -1697,8 +1741,8 @@
         </div>
 
         <div class="relative mt-12 w-full max-w-[1440px] flex justify-center">
-            <img src="./imgdrive/iwatch.png"
-                alt="Apple Watch Series 10 Display" class="w-full h-auto object-contain max-h-[600px]">
+            <img src="./imgdrive/iwatch.png" alt="Apple Watch Series 10 Display"
+                class="w-full h-auto object-contain max-h-[600px]">
         </div>
 
     </section>
@@ -1714,8 +1758,11 @@
                     <div class="text-white text-[36px] font-semibold leading-tight">AirPods 4</div>
                     <div class="text-white/90 text-[17px] mt-2">Iconic sound. Next-level comfort.</div>
                     <div class="mt-6 flex items-center gap-4">
-                        <a href="#" class="watch-button inline-flex items-center justify-center px-[30px] h-[48px] border border-white rounded-full text-[15px] text-white hover:bg-white hover:text-black transition-all duration-300">Learn more</a>
-                        <a href="#" class="watch-button inline-flex items-center justify-center px-[30px] h-[48px] border border-white rounded-full text-[15px] text-white hover:bg-white hover:text-black transition-all duration-300">Buy</a>
+                        <a href="#"
+                            class="watch-button inline-flex items-center justify-center px-[30px] h-[48px] border border-white rounded-full text-[15px] text-white hover:bg-white hover:text-black transition-all duration-300">Learn
+                            more</a>
+                        <a href="#"
+                            class="watch-button inline-flex items-center justify-center px-[30px] h-[48px] border border-white rounded-full text-[15px] text-white hover:bg-white hover:text-black transition-all duration-300">Buy</a>
                     </div>
                 </div>
             </div>
@@ -1723,112 +1770,106 @@
     </section>
 
     <!-- Section: Real Speed (Service) -->
-<section class="py-[80px] bg-white flex flex-col overflow-hidden border-b border-[#E5E5E7]">
+    <section class="py-[80px] bg-white flex flex-col overflow-hidden border-b border-[#E5E5E7]">
 
-    <!-- Heading and Navigation -->
-    <div class="w-full pl-[108px] pr-[108px] mb-[64px]">
-        <div class="reveal">
-            <div class="sf-section-eyebrow mb-[12px]">Service</div>
-            <div class="sf-section-h2 w-[695px]">
-                Fast turnarounds without cutting a single corner.
+        <!-- Heading and Navigation -->
+        <div class="w-full pl-[108px] pr-[108px] mb-[64px]">
+            <div class="reveal">
+                <div class="sf-section-eyebrow mb-[12px]">Service</div>
+                <div class="sf-section-h2 w-[695px]">
+                    Fast turnarounds without cutting a single corner.
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Scroll Area -->
-    <div id="service-scroll-area" class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-[108px] pb-[20px]">
+        <!-- Scroll Area -->
+        <div id="service-scroll-area"
+            class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-[108px] pb-[20px]">
 
-        <div id="service-scroll-container"
-            class="flex w-max gap-[20px] pl-[108px] pr-[108px] pt-2 reveal reveal-delay-1">
+            <div id="service-scroll-container"
+                class="flex w-max gap-[20px] pl-[108px] pr-[108px] pt-2 reveal reveal-delay-1">
 
-            <!-- CARD 1 -->
-            <div
-                class="min-w-[372px] w-[372px] h-[600px] bg-white rounded-[24px] relative overflow-hidden snap-start hover-lift cursor-pointer flex-shrink-0 group shadow-card">
-                <img src="./imgdrive/card01.png"
-                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                <div class="absolute inset-0 bg-gradient-to-b from-white/90 via-white/30 to-transparent"></div>
-                <div class="absolute left-[32px] top-[32px] w-[306px] flex flex-col gap-[8px] z-10">
-                    <div class="text-[#1E1E1E]"
-                        style="font-weight:600;font-size:17px;line-height:21px;">
-                        Precision.
+                <!-- CARD 1 -->
+                <div
+                    class="min-w-[372px] w-[372px] h-[600px] bg-white rounded-[24px] relative overflow-hidden snap-start hover-lift cursor-pointer flex-shrink-0 group shadow-card">
+                    <img src="./imgdrive/card01.png"
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-b from-white/90 via-white/30 to-transparent"></div>
+                    <div class="absolute left-[32px] top-[32px] w-[306px] flex flex-col gap-[8px] z-10">
+                        <div class="text-[#1E1E1E]" style="font-weight:600;font-size:17px;line-height:21px;">
+                            Precision.
+                        </div>
+                        <p class="text-[#1E1E1E]" style="font-weight:700;font-size:26.9px;line-height:32px;margin:0;">
+                            Every screw perfectly placed.
+                        </p>
                     </div>
-                    <p class="text-[#1E1E1E]"
-                        style="font-weight:700;font-size:26.9px;line-height:32px;margin:0;">
-                        Every screw perfectly placed.
-                    </p>
                 </div>
-            </div>
 
-            <!-- CARD 2 -->
-            <div
-                class="min-w-[372px] w-[372px] h-[600px] bg-[#2A2A2A] rounded-[24px] relative overflow-hidden snap-start hover-lift cursor-pointer flex-shrink-0 group shadow-card">
-                <img src="./imgdrive/card02.png"
-                    class="absolute inset-0 w-full h-full object-cover opacity-75 transition-transform duration-700 group-hover:scale-110">
-                <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/60"></div>
-                <div class="absolute left-[32px] top-[32px] w-[306px] flex flex-col gap-[8px] z-10">
-                    <div class="text-white"
-                        style="font-weight:600;font-size:17px;line-height:21px;">
-                        Genuine.
+                <!-- CARD 2 -->
+                <div
+                    class="min-w-[372px] w-[372px] h-[600px] bg-[#2A2A2A] rounded-[24px] relative overflow-hidden snap-start hover-lift cursor-pointer flex-shrink-0 group shadow-card">
+                    <img src="./imgdrive/card02.png"
+                        class="absolute inset-0 w-full h-full object-cover opacity-75 transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/60"></div>
+                    <div class="absolute left-[32px] top-[32px] w-[306px] flex flex-col gap-[8px] z-10">
+                        <div class="text-white" style="font-weight:600;font-size:17px;line-height:21px;">
+                            Genuine.
+                        </div>
+                        <p class="text-white" style="font-weight:700;font-size:26.9px;line-height:32px;margin:0;">
+                            Only authentic parts touch your device.
+                        </p>
                     </div>
-                    <p class="text-white"
-                        style="font-weight:700;font-size:26.9px;line-height:32px;margin:0;">
-                        Only authentic parts touch your device.
-                    </p>
                 </div>
-            </div>
 
-            <!-- CARD 3 -->
-            <div
-                class="min-w-[372px] w-[372px] h-[600px] bg-gradient-to-br from-[#1a3a5c] to-[#0f1f35] rounded-[24px] relative overflow-hidden snap-start hover-lift cursor-pointer flex-shrink-0 group shadow-card">
-                <img src="./imgdrive/card03.png"
-                    class="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110">
-                <div class="absolute inset-0 bg-gradient-to-b from-blue-950/30 via-transparent to-blue-950/60"></div>
-                <div class="absolute left-[32px] top-[32px] w-[306px] flex flex-col gap-[8px] z-10">
-                    <div class="text-white"
-                        style="font-weight:600;font-size:17px;line-height:21px;">
-                        Speed.
+                <!-- CARD 3 -->
+                <div
+                    class="min-w-[372px] w-[372px] h-[600px] bg-gradient-to-br from-[#1a3a5c] to-[#0f1f35] rounded-[24px] relative overflow-hidden snap-start hover-lift cursor-pointer flex-shrink-0 group shadow-card">
+                    <img src="./imgdrive/card03.png"
+                        class="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-b from-blue-950/30 via-transparent to-blue-950/60">
                     </div>
-                    <p class="text-white"
-                        style="font-weight:700;font-size:26.9px;line-height:32px;margin:0;">
-                        Expert service team for your Apple product.
-                    </p>
-                </div>
-            </div>
-
-            <!-- CARD 4 -->
-            <div
-                class="min-w-[372px] w-[372px] h-[600px] bg-[#FAFAFA] rounded-[24px] relative overflow-hidden snap-start hover-lift cursor-pointer flex-shrink-0 group shadow-card">
-                <img src="./imgdrive/card05.png"
-                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                <div class="absolute inset-0 bg-gradient-to-b from-white/80 via-white/20 to-transparent"></div>
-                <div class="absolute left-[32px] top-[32px] w-[306px] flex flex-col gap-[8px] z-10">
-                    <div class="text-[#1E1E1E]"
-                        style="font-weight:600;font-size:17px;line-height:21px;">
-                        Transparency.
+                    <div class="absolute left-[32px] top-[32px] w-[306px] flex flex-col gap-[8px] z-10">
+                        <div class="text-white" style="font-weight:600;font-size:17px;line-height:21px;">
+                            Speed.
+                        </div>
+                        <p class="text-white" style="font-weight:700;font-size:26.9px;line-height:32px;margin:0;">
+                            Expert service team for your Apple product.
+                        </p>
                     </div>
-                    <p class="text-[#1E1E1E]"
-                        style="font-weight:700;font-size:26.9px;line-height:32px;margin:0;">
-                        Track every step, from intake to pickup.
-                    </p>
                 </div>
-            </div>
 
+                <!-- CARD 4 -->
+                <div
+                    class="min-w-[372px] w-[372px] h-[600px] bg-[#FAFAFA] rounded-[24px] relative overflow-hidden snap-start hover-lift cursor-pointer flex-shrink-0 group shadow-card">
+                    <img src="./imgdrive/card05.png"
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-b from-white/80 via-white/20 to-transparent"></div>
+                    <div class="absolute left-[32px] top-[32px] w-[306px] flex flex-col gap-[8px] z-10">
+                        <div class="text-[#1E1E1E]" style="font-weight:600;font-size:17px;line-height:21px;">
+                            Transparency.
+                        </div>
+                        <p class="text-[#1E1E1E]" style="font-weight:700;font-size:26.9px;line-height:32px;margin:0;">
+                            Track every step, from intake to pickup.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
 
-    <!-- Scroll Buttons -->
-    <div class="w-full flex justify-end gap-[16px] mt-[32px] pr-[108px]">
-        <button id="service-scroll-left-bottom"
-            class="w-[44px] h-[44px] rounded-full bg-[#F5F5F7] flex items-center justify-center hover:bg-[#E8E8ED] transition">
-            <i data-lucide="chevron-left" class="w-[24px] h-[24px]"></i>
-        </button>
-        <button id="service-scroll-right-bottom"
-            class="w-[44px] h-[44px] rounded-full bg-[#F5F5F7] flex items-center justify-center hover:bg-[#E8E8ED] transition">
-            <i data-lucide="chevron-right" class="w-[24px] h-[24px]"></i>
-        </button>
-    </div>
+        <!-- Scroll Buttons -->
+        <div class="w-full flex justify-end gap-[16px] mt-[32px] pr-[108px]">
+            <button id="service-scroll-left-bottom"
+                class="w-[44px] h-[44px] rounded-full bg-[#F5F5F7] flex items-center justify-center hover:bg-[#E8E8ED] transition">
+                <i data-lucide="chevron-left" class="w-[24px] h-[24px]"></i>
+            </button>
+            <button id="service-scroll-right-bottom"
+                class="w-[44px] h-[44px] rounded-full bg-[#F5F5F7] flex items-center justify-center hover:bg-[#E8E8ED] transition">
+                <i data-lucide="chevron-right" class="w-[24px] h-[24px]"></i>
+            </button>
+        </div>
 
-</section>
+    </section>
     <!-- Section: Magical Connections (Essential Add-ons) -->
     <section class="bg-white py-[80px] flex flex-col items-center overflow-hidden border-b border-[#E5E5E7]">
         <div class="w-full px-[108px] mb-[64px]">
@@ -1850,8 +1891,7 @@
             <!-- ✅ FIRST CARD (ONLY IMAGE, FULL COVER) -->
             <div
                 class="w-[400px] h-[500px] rounded-[18px] overflow-hidden flex-shrink-0 snap-start shadow-md hover:shadow-xl transition duration-300">
-                <img src="./imgdrive/essential-addons.png"
-                    alt="Accessories"
+                <img src="./imgdrive/essential-addons.png" alt="Accessories"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
             </div>
 
@@ -1943,8 +1983,8 @@
                 <div
                     class="w-full h-[631px] rounded-[24px] relative overflow-hidden bg-black hover-lift cursor-pointer  ">
                     <img src="./imgdrive/large.png"
-                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                        <!-- overlay removed to keep image bright -->
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <!-- overlay removed to keep image bright -->
                     <div class="absolute left-[50px] bottom-[80px] w-full max-w-[537px] flex flex-col gap-[24px] z-10">
                         <h3 class="font-bold text-[30.875px] leading-[36px] tracking-[0.128px] text-white w-[428px]">
                             Accidents happen. We fix them fast.</h3>
