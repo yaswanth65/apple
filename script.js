@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const slides = document.querySelectorAll('.hero-slide');
     let currentSlide = 0;
     let heroIntervalId = null;
-    const slideInterval = 3000;
+    const slideInterval = 5000;
 
     function showSlide(index) {
         if (!slides.length) return;
