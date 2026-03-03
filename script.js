@@ -1,6 +1,24 @@
 // Initialize Icons
 lucide.createIcons();
 
+// Slider functionality - only initialize if elements exist
+document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('serviceSlider');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+
+    if (slider && nextBtn && prevBtn) {
+        const cardWidth = 392; // 372px card + 20px gap
+
+        nextBtn.addEventListener('click', () => {
+            slider.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            slider.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+        });
+    }
+});
 // Note: Mega Menu Hover Functionality is now handled in index.html inline script
 document.addEventListener('DOMContentLoaded', () => {
     const reveals = document.querySelectorAll('.reveal');
@@ -57,4 +75,41 @@ document.addEventListener('DOMContentLoaded', () => {
         const first = card.querySelector('.color-swatch');
         if (first) first.click();
     });
+
+    // Service Section Scroll Functionality
+    const serviceScrollContainer = document.getElementById('service-scroll-container');
+    const serviceScrollLeftBtn = document.getElementById('service-scroll-left');
+    const serviceScrollRightBtn = document.getElementById('service-scroll-right');
+
+    if (serviceScrollContainer && serviceScrollLeftBtn && serviceScrollRightBtn) {
+        const scrollAmount = 392; // Card width (372px) + gap (20px)
+
+        serviceScrollLeftBtn.addEventListener('click', () => {
+            serviceScrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+
+        serviceScrollRightBtn.addEventListener('click', () => {
+            serviceScrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+
+        // Update button states based on scroll position
+        const updateButtonStates = () => {
+            const isAtStart = serviceScrollContainer.scrollLeft <= 0;
+            const isAtEnd = serviceScrollContainer.scrollLeft >= 
+                (serviceScrollContainer.scrollWidth - serviceScrollContainer.clientWidth - 10);
+
+            // Visual feedback: disable/enable buttons
+            serviceScrollLeftBtn.style.opacity = isAtStart ? '0.5' : '1';
+            serviceScrollLeftBtn.style.pointerEvents = isAtStart ? 'none' : 'auto';
+            
+            serviceScrollRightBtn.style.opacity = isAtEnd ? '0.5' : '1';
+            serviceScrollRightBtn.style.pointerEvents = isAtEnd ? 'none' : 'auto';
+        };
+
+        // Initial check
+        updateButtonStates();
+
+        // Update on scroll
+        serviceScrollContainer.addEventListener('scroll', updateButtonStates);
+    }
 });
