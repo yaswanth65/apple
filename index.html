@@ -202,9 +202,346 @@
                 if (first) first.classList.add('active');
             });
         });
+
+        // Hero slider: show second slide on mobile
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.innerWidth <= 768) {
+                const slides = document.querySelectorAll('.hero-slide');
+                if (slides.length >= 2) {
+                    slides[0].classList.remove('active');
+                    slides[1].classList.add('active');
+                }
+            }
+        });
     </script>
     <style>
-        /* ===== RESET & BASE STYLES ===== */
+        /* ===== MOBILE-FIRST RESPONSIVE IMPROVEMENTS ===== */
+        /* Force better mobile sizing by default, then expand for larger screens */
+        
+        /* Product cards - constrain size */
+        div.product-card {
+            max-width: 100% !important;
+        }
+
+        /* Scroll containers - control overflow better */
+        div[class*="overflow-x-auto"] {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+
+        /* Limit scroll container card sizes */
+        div[class*="flex"][class*="w-max"] > div {
+            min-width: 280px;
+            flex-shrink: 0;
+        }
+
+        /* Better hero section proportions */
+        section[class*="relative"][class*="min-h-screen"] {
+            min-height: 100vh;
+        }
+
+        @media (max-width: 1024px) {
+            /* Tablet and below adjustments */
+            div[class*="px-\[108px\]"] {
+                padding-left: 24px !important;
+                padding-right: 24px !important;
+            }
+
+            div[class*="md:px-\[108px\]"] {
+                padding-left: 24px !important;
+                padding-right: 24px !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* ===== TABLET / MOBILE ADJUSTMENTS ===== */
+            
+            /* All padding with 108px - reduce to 16px */
+            div[class*="px-\[108px\]"],
+            div[class*="md:px-\[108px\]"],
+            section[class*="px-\[108px\]"],
+            section[class*="md:px-\[108px\]"] {
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+            }
+
+            /* Scroll padding adjustments */
+            div[class*="scroll-pl-4"][class*="md:scroll-pl-\[108px\]"],
+            div[class*="md:scroll-pl-\[108px\]"] {
+                scroll-padding-left: 16px !important;
+            }
+
+            /* Gap reductions */
+            div[class*="gap-\[24px\]"] {
+                gap: 16px !important;
+            }
+
+            div[class*="gap-\[20px\]"] {
+                gap: 12px !important;
+            }
+
+            /* Card sizing */
+            div[class*="h-\[320px\]"] {
+                height: 280px !important;
+            }
+
+            div[class*="h-\[350px\]"] {
+                height: 280px !important;
+            }
+
+            div[class*="h-\[500px\]"] {
+                height: 420px !important;
+            }
+
+            div[class*="h-\[600px\]"] {
+                height: 480px !important;
+            }
+
+            div[class*="h-\[80vh\]"] {
+                height: 60vh !important;
+            }
+
+            /* Product card images */
+            div[class*="h-\[320px\]"] img {
+                max-height: 220px !important;
+            }
+
+            div[class*="h-\[350px\]"] img {
+                max-height: 220px !important;
+            }
+
+            /* Section padding */
+            section[class*="py-\[80px\]"] {
+                padding-top: 40px !important;
+                padding-bottom: 40px !important;
+            }
+
+            /* Margin adjustments */
+            div[class*="mb-\[40px\]"] {
+                margin-bottom: 24px !important;
+            }
+
+            /* Heading spacing */
+            div[class*="gap-\[56px\]"] {
+                gap: 32px !important;
+            }
+
+            /* Watch section */
+            div[class*="pt-24"] {
+                padding-top: 16px !important;
+            }
+
+            div[class*="min-h-screen"] {
+                min-height: auto !important;
+            }
+
+            /* Button sizing */
+            a[class*="watch-button"],
+            button[class*="h-\[56px\]"],
+            a[class*="h-\[56px\]"] {
+                height: 48px !important;
+                font-size: 14px !important;
+            }
+
+            a[class*="h-\[48px\]"],
+            button[class*="h-\[48px\]"] {
+                font-size: 14px !important;
+            }
+
+            /* Text sizing */
+            p[class*="text-\[23px\]"] {
+                font-size: 18px !important;
+            }
+
+            p[class*="text-\[26.9px\]"] {
+                font-size: 20px !important;
+            }
+
+            .text-\[36px\] {
+                font-size: 28px !important;
+            }
+
+            .text-\[17px\] {
+                font-size: 15px !important;
+            }
+
+            /* Flex direction for stacked layouts */
+            div[class*="md:flex-row"] {
+                flex-direction: column !important;
+            }
+
+            div[class*="md:flex-row"] > * {
+                width: 100% !important;
+            }
+
+            /* Watch image */
+            img[class*="w-\[200px\]"][class*="md:w-\[284px\]"] {
+                width: 160px !important;
+            }
+
+            /* Container max widths */
+            div[class*="max-w-\[606px\]"] {
+                max-width: 100% !important;
+            }
+
+            /* Hero adjustments */
+            .hero-light .hero-image-wrap {
+                height: 50% !important;
+            }
+
+            .hero-light .hero-copy-wrap {
+                height: 50% !important;
+                padding: 12px 16px 16px !important;
+            }
+
+            .hero-slide[data-hero-index="0"] .hero-image-wrap {
+                height: 54% !important;
+            }
+
+            .hero-slide[data-hero-index="0"] .hero-copy-wrap {
+                height: 46% !important;
+                margin-top: -30px !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            /* ===== SMALLER MOBILE DEVICES ===== */
+            
+            div[class*="px-\[108px\]"],
+            div[class*="md:px-\[108px\]"] {
+                padding-left: 12px !important;
+                padding-right: 12px !important;
+            }
+
+            div[class*="gap-\[24px\]"] {
+                gap: 12px !important;
+            }
+
+            div[class*="gap-\[20px\]"] {
+                gap: 8px !important;
+            }
+
+            section[class*="py-\[80px\]"] {
+                padding-top: 32px !important;
+                padding-bottom: 32px !important;
+            }
+
+            div[class*="h-\[500px\]"] {
+                height: 380px !important;
+            }
+
+            div[class*="h-\[320px\]"] {
+                height: 240px !important;
+            }
+
+            .product-card {
+                width: 100% !important;
+                max-width: 340px !important;
+                margin: 0 auto !important;
+            }
+
+            /* Reduce image container heights */
+            div[class*="h-\[350px\]"] {
+                height: 240px !important;
+            }
+
+            /* Smaller buttons */
+            a[class*="watch-button"],
+            button[class*="h-\[56px\]"] {
+                height: 44px !important;
+                font-size: 13px !important;
+                padding: 10px 16px !important;
+            }
+
+            /* Hero text sizing */
+            .hero-title {
+                font-size: 24px !important;
+            }
+
+            .hero-subtitle {
+                font-size: 14px !important;
+            }
+
+            .hero-dark-title {
+                font-size: 24px !important;
+            }
+
+            .hero-dark-subtitle {
+                font-size: 16px !important;
+            }
+
+            .hero-dark-desc {
+                font-size: 14px !important;
+            }
+
+            /* Card padding reduction */
+            div[class*="px-6"][class*="py-6"],
+            div[class*="px-6"][class*="py-5"] {
+                padding: 12px 14px !important;
+            }
+
+            /* Small heading margins */
+            div[class*="mb-\[40px\]"] {
+                margin-bottom: 16px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* ===== VERY SMALL MOBILE DEVICES ===== */
+            
+            div[class*="px-\[108px\]"],
+            div[class*="md:px-\[108px\]"],
+            div[class*="px-4"][class*="md:px-\[108px\]"] {
+                padding-left: 8px !important;
+                padding-right: 8px !important;
+            }
+
+            .product-card {
+                width: calc(100vw - 16px) !important;
+                max-width: 280px !important;
+                margin: 0 auto !important;
+            }
+
+            section[class*="py-\[80px\]"] {
+                padding-top: 24px !important;
+                padding-bottom: 24px !important;
+            }
+
+            div[class*="gap-\[24px\]"],
+            div[class*="gap-\[20px\]"] {
+                gap: 6px !important;
+            }
+
+            /* Minimal spacing */
+            div[class*="h-\[500px\]"] {
+                height: 340px !important;
+            }
+
+            div[class*="h-\[320px\]"] {
+                height: 200px !important;
+            }
+
+            /* Very small buttons */
+            a[class*="watch-button"],
+            button {
+                font-size: 12px !important;
+                height: 40px !important;
+                padding: 8px 12px !important;
+            }
+
+            /* Aggressive text sizing */
+            .hero-title {
+                font-size: 20px !important;
+            }
+
+            .hero-subtitle {
+                font-size: 12px !important;
+            }
+
+            img[class*="w-\[200px\]"] {
+                width: 120px !important;
+            }
+        }
         * {
             scroll-behavior: smooth;
         }
@@ -284,8 +621,8 @@
         .hero-slide[data-hero-index="0"] .hero-title {
             font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
             font-weight: 700;
-            font-size: 56px;
-            line-height: 60px;
+            font-size: clamp(36px, 5vw, 56px);
+            line-height: normal;
             letter-spacing: -0.28px;
             color: #1d1d1f;
             display: flex;
@@ -298,8 +635,8 @@
             max-width: 803px;
             font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
             font-weight: 500;
-            font-size: 23.0625px;
-            line-height: 28px;
+            font-size: clamp(16px, 3vw, 23.0625px);
+            line-height: normal;
             letter-spacing: 0.216px;
             color: rgba(29, 29, 31, 0.72);
             text-align: center;
@@ -307,7 +644,7 @@
         }
 
         .hero-title {
-            font-size: 56px;
+            font-size: clamp(36px, 5vw, 56px);
             font-weight: 600;
             letter-spacing: -0.03em;
             line-height: 1.05;
@@ -316,7 +653,7 @@
 
         .hero-subtitle {
             margin-top: 12px;
-            font-size: 24px;
+            font-size: clamp(18px, 3.5vw, 24px);
             line-height: 1.28;
             font-weight: 500;
         }
@@ -347,8 +684,8 @@
             margin: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
             font-weight: 700;
-            font-size: 56px;
-            line-height: 60px;
+            font-size: clamp(36px, 5vw, 56px);
+            line-height: normal;
             letter-spacing: -0.28px;
             color: #F5F5F7;
         }
@@ -357,8 +694,8 @@
             margin: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
             font-weight: 400;
-            font-size: 28px;
-            line-height: 34px;
+            font-size: clamp(20px, 4vw, 28px);
+            line-height: normal;
             letter-spacing: 0.196px;
             color: #F5F5F7;
         }
@@ -369,7 +706,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
             font-weight: 400;
             font-size: 17px;
-            line-height: 25px;
+            line-height: normal;
             letter-spacing: 0.2px;
             color: rgba(255, 255, 255, 0.8);
         }
@@ -390,11 +727,11 @@
 
         @media (max-width: 768px) {
             .hero-title {
-                font-size: 44px;
+                font-size: clamp(28px, 6vw, 44px);
             }
 
             .hero-subtitle {
-                font-size: 20px;
+                font-size: clamp(16px, 3vw, 20px);
             }
 
             .hero-light .hero-image-wrap {
@@ -421,13 +758,13 @@
             }
 
             .hero-slide[data-hero-index="0"] .hero-title {
-                font-size: 44px;
-                line-height: 46px;
+                font-size: clamp(28px, 6vw, 44px);
+                line-height: normal;
             }
 
             .hero-slide[data-hero-index="0"] .hero-subtitle {
                 font-size: 18px;
-                line-height: 24px;
+                line-height: normal;
                 max-width: 92%;
             }
 
@@ -513,8 +850,8 @@
         /* ===== TYPOGRAPHY SYSTEM ===== */
         .sf-hero-h1 {
             font-weight: 600;
-            font-size: 56px;
-            line-height: 60px;
+            font-size: clamp(36px, 5vw, 56px);
+            line-height: normal;
             /* match design: 56px font, 60px line */
             letter-spacing: -0.28px;
             color: #1D1D1F;
@@ -523,15 +860,15 @@
         .sf-hero-sub {
             font-weight: 400;
             font-size: 18px;
-            line-height: 20px;
+            line-height: normal;
             letter-spacing: 0.196px;
             color: #424245;
         }
 
         .sf-mac-h2 {
             font-weight: 700;
-            font-size: 56px;
-            line-height: 60px;
+            font-size: clamp(36px, 5vw, 56px);
+            line-height: normal;
             /* precise 60px to match spec */
             letter-spacing: -0.28px;
             color: #F5F5F7;
@@ -540,8 +877,8 @@
 
         .sf-mac-sub {
             font-weight: 400;
-            font-size: 28px;
-            line-height: 32px;
+            font-size: clamp(20px, 4vw, 28px);
+            line-height: normal;
             /* 28px font with 32px line-height per spec */
             letter-spacing: 0.196px;
             color: #F5F5F7;
@@ -549,8 +886,8 @@
 
         .sf-mac-p {
             font-weight: 500;
-            font-size: 23.0625px;
-            line-height: 28px;
+            font-size: clamp(16px, 3vw, 23.0625px);
+            line-height: normal;
             /* explicit px line-height from spec */
             letter-spacing: 0.216px;
             color: rgba(255, 255, 255, 0.65);
@@ -560,7 +897,7 @@
         .sf-section-eyebrow {
             font-weight: 500;
             font-size: 18px;
-            line-height: 21px;
+            line-height: normal;
             letter-spacing: -0.37px;
             color: #000000;
             text-transform: none;
@@ -569,8 +906,8 @@
 
         .sf-section-h2 {
             font-weight: 700;
-            font-size: 42.14px;
-            line-height: 60px;
+            font-size: clamp(28px, 4vw, 42.14px);
+            line-height: normal;
             letter-spacing: -0.28px;
             color: #1D1D1F;
             vertical-align: middle;
@@ -603,7 +940,7 @@
 
         .sf-airpods-h3 {
             font-weight: 700;
-            font-size: 56px;
+            font-size: clamp(36px, 5vw, 56px);
             line-height: 1;
             letter-spacing: -0.576px;
             color: #F5F5F7;
@@ -643,7 +980,7 @@
         .sf-stats-h3 {
             font-weight: 700;
             font-size: 19px;
-            line-height: 29px;
+            line-height: normal;
             letter-spacing: -0.8px;
             color: #1D1D1F;
             display: flex;
@@ -660,7 +997,7 @@
         .sf-stats-p {
             font-weight: 400;
             font-size: 21px;
-            line-height: 29px;
+            line-height: normal;
             letter-spacing: 0.231px;
             color: #1D1D1F;
             display: flex;
@@ -672,7 +1009,7 @@
         .sf-stats-link {
             font-weight: 400;
             font-size: 21px;
-            line-height: 29px;
+            line-height: normal;
             letter-spacing: 0.231px;
             color: #0066CC;
             display: flex;
@@ -1083,6 +1420,239 @@
         /* ===== RESPONSIVE TYPOGRAPHY ===== */
         /* Responsive styles removed - Desktop only */
 
+        /* ===== MOBILE OPTIMIZATIONS ===== */
+        @media (max-width: 768px) {
+            /* Product card wrapper - responsive sizing */
+            div[class*="overflow-x-auto"][class*="snap-x"] {
+                scroll-behavior: smooth;
+            }
+
+            /* Target product cards directly by their structure */
+            .product-card {
+                width: 280px !important;
+                max-width: 100% !important;
+            }
+
+            /* Reduce card heights on mobile */
+            div[class*="h-\[320px\]"] {
+                height: 280px !important;
+            }
+
+            div[class*="h-\[350px\]"] {
+                height: 280px !important;
+            }
+
+            div[class*="h-\[500px\]"] {
+                height: 420px !important;
+            }
+
+            div[class*="h-\[600px\]"] {
+                height: 480px !important;
+            }
+
+            /* Product images */
+            div[class*="h-\[320px\]"] img,
+            div[class*="h-\[350px\]"] img {
+                max-height: 220px !important;
+                width: auto !important;
+            }
+
+            /* Padding adjustments */
+            div[class*="px-4"][class*="px-\[108px\]"],
+            div[class*="md:px-\[108px\]"] {
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+            }
+
+            /* Gap adjustments */
+            div[class*="gap-\[24px\]"] {
+                gap: 16px !important;
+            }
+
+            div[class*="gap-\[20px\]"] {
+                gap: 12px !important;
+            }
+
+            /* Watch section cleanup */
+            div[class*="pt-24"] {
+                padding-top: 16px !important;
+            }
+
+            div[class*="min-h-screen"] {
+                min-height: auto !important;
+            }
+
+            /* Button sizing */
+            div[class*="h-\[56px\]"],
+            a[class*="h-\[56px\]"],
+            button[class*="h-\[56px\]"] {
+                height: 48px !important;
+            }
+
+            div[class*="h-\[80vh\]"] {
+                height: 60vh !important;
+            }
+
+            /* Section padding */
+            section[class*="py-\[80px\]"] {
+                padding-top: 40px !important;
+                padding-bottom: 40px !important;
+            }
+
+            /* Margin adjustments */
+            div[class*="mb-\[40px\]"] {
+                margin-bottom: 24px !important;
+            }
+
+            /* Text sizing */
+            p[class*="text-\[23px\]"] {
+                font-size: 18px !important;
+                line-height: 1.4 !important;
+            }
+
+            p[class*="text-\[26.9px\]"] {
+                font-size: 20px !important;
+            }
+
+            /* Watch buttons */
+            a[class*="watch-button"] {
+                font-size: 14px !important;
+                padding: 12px 20px !important;
+            }
+
+            /* Flex direction for buttons */
+            div[class*="md:flex-row"] {
+                flex-direction: column !important;
+            }
+
+            div[class*="md:flex-row"] > a {
+                width: 100% !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            /* Extra small device optimizations */
+            div[class*="px-\[108px\]"] {
+                padding-left: 12px !important;
+                padding-right: 12px !important;
+            }
+
+            div[class*="gap-\[24px\]"] {
+                gap: 12px !important;
+            }
+
+            div[class*="gap-\[20px\]"] {
+                gap: 8px !important;
+            }
+
+            section[class*="py-\[80px\]"] {
+                padding-top: 32px !important;
+                padding-bottom: 32px !important;
+            }
+
+            .product-card {
+                width: 100% !important;
+                max-width: 320px !important;
+            }
+
+            /* Container max width */
+            div[class*="max-w-\[606px\]"] {
+                max-width: 100% !important;
+                padding: 0 12px !important;
+            }
+
+            /* Hero adjustments */
+            div[class*="hero-light"] {
+                flex-direction: column !important;
+            }
+
+            .hero-light .hero-image-wrap {
+                height: 50% !important;
+                width: 100% !important;
+            }
+
+            .hero-light .hero-copy-wrap {
+                height: 50% !important;
+                width: 100% !important;
+            }
+
+            /* Smaller heading margins */
+            div[class*="mb-\[40px\]"] {
+                margin-bottom: 16px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Ultra small devices */
+            div[class*="px-4"][class*="px-\[108px\]"] {
+                padding-left: 8px !important;
+                padding-right: 8px !important;
+            }
+
+            .product-card {
+                width: calc(100vw - 16px) !important;
+                max-width: 300px !important;
+            }
+
+            section[class*="py-\[80px\]"] {
+                padding-top: 24px !important;
+                padding-bottom: 24px !important;
+            }
+
+            div[class*="h-\[500px\]"] {
+                height: 380px !important;
+            }
+
+            div[class*="h-\[320px\]"] {
+                height: 240px !important;
+            }
+
+            /* Reduce gaps even more */
+            div[class*="gap-\[24px\]"],
+            div[class*="gap-\[20px\]"] {
+                gap: 8px !important;
+            }
+
+            /* Small buttons */
+            a[class*="watch-button"],
+            button[class*="h-\[56px\]"] {
+                height: 44px !important;
+                font-size: 13px !important;
+                padding: 10px 16px !important;
+            }
+
+            .text-white {
+                font-size: 16px !important;
+            }
+
+            /* Reduce image sizes */
+            div[class*="w-\[200px\]"][class*="md:w-\[284px\]"] {
+                width: 140px !important;
+                max-width: 100% !important;
+            }
+
+            /* Hero section adjustments */
+            .hero-title {
+                font-size: 24px !important;
+            }
+
+            .hero-subtitle {
+                font-size: 14px !important;
+            }
+
+            .hero-dark-title {
+                font-size: 24px !important;
+            }
+
+            .hero-dark-subtitle {
+                font-size: 16px !important;
+            }
+
+            .hero-dark-desc {
+                font-size: 14px !important;
+            }
+        }
+
         /* ===== GLOBAL TAG STYLES ===== */
         p,
         span,
@@ -1091,7 +1661,7 @@
         button {
             font-weight: 600;
             font-size: 17px;
-            line-height: 21px;
+            line-height: normal;
             letter-spacing: -0.37px;
             vertical-align: middle;
         }
@@ -1104,11 +1674,11 @@
     <nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-lg border-b border-gray-200 h-12 flex items-center transition-all duration-300"
         id="navbar">
         <div
-            class="max-w-[1440px] w-full mx-auto px-8 flex justify-between items-center text-xs font-medium text-gray-800/75">
+            class="max-w-[1440px] w-full mx-auto px-4 md:px-8 flex justify-between items-center text-xs font-medium text-gray-800/75">
             <a href="#" class="hover:text-black transition duration-200 flex-shrink-0 font-bold text-lg">
                 IHDM INDIA
             </a>
-            <div class="flex space-x-8" id="nav-links">
+            <div class="hidden md:flex space-x-8" id="nav-links">
                 <button type="button" data-menu="store"
                     class="hover:text-black transition duration-200 outline-none cursor-pointer text-gray-700">Store</button>
                 <button type="button" data-menu="mac"
@@ -1124,13 +1694,16 @@
                 <button type="button" data-menu="support"
                     class="hover:text-black transition duration-200 outline-none cursor-pointer text-gray-700">Support</button>
             </div>
-            <div class="flex items-center space-x-5">
+            <div class="flex items-center space-x-4 md:space-x-5">
                 <a href="#" class="hover:text-black transition duration-200" aria-label="Search">
-                    <i data-lucide="search" class="w-4 h-4 stroke-[2]"></i>
+                    <i data-lucide="search" class="w-4 h-4 md:w-4 md:h-4 stroke-[2]"></i>
                 </a>
                 <a href="#" class="hover:text-black transition duration-200 relative" aria-label="Shopping bag">
-                    <i data-lucide="shopping-bag" class="w-4 h-4 stroke-[2]"></i>
+                    <i data-lucide="shopping-bag" class="w-4 h-4 md:w-4 md:h-4 stroke-[2]"></i>
                 </a>
+                <button type="button" class="md:hidden hover:text-black transition duration-200 outline-none" aria-label="Menu" id="mobile-menu-btn">
+                    <i data-lucide="menu" class="w-5 h-5 stroke-[2]"></i>
+                </button>
             </div>
         </div>
     </nav>
@@ -1142,13 +1715,13 @@
     </div>
 
     <div id="mega-menu"
-        class="fixed top-12 left-0 w-full bg-white z-40 max-h-0 overflow-hidden transition-all duration-300 ease-in-out shadow-sm pointer-events-none"
+        class="fixed top-12 left-0 w-full bg-white z-40 max-h-0 overflow-y-auto overflow-x-hidden transition-all duration-300 ease-in-out shadow-sm pointer-events-none"
         style="max-height: 0px; transition: max-height 0.3s ease-in-out;">
-        <div class="w-full px-8 py-10 border-b border-gray-200">
-            <div class="max-w-[1440px] mx-auto grid grid-cols-4 gap-8" id="menu-content">
+        <div class="w-full px-4 md:px-8 py-10 border-b border-gray-200">
+            <div class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-8" id="menu-content">
 
                 <!-- Store Menu -->
-                <div id="store-menu" class="col-span-4 grid grid-cols-4 gap-8 mega-submenu">
+                <div id="store-menu" class="col-span-4 grid grid-cols-1 md:grid-cols-4 gap-8 mega-submenu">
                     <div>
                         <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Shop</h3>
                         <ul class="space-y-2 text-gray-800 text-sm">
@@ -1188,7 +1761,7 @@
                 </div>
 
                 <!-- Mac Menu -->
-                <div id="mac-menu" class="col-span-4 grid grid-cols-4 gap-8 mega-submenu">
+                <div id="mac-menu" class="col-span-4 grid grid-cols-1 md:grid-cols-4 gap-8 mega-submenu">
                     <div>
                         <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Explore</h3>
                         <ul class="space-y-2 text-gray-800 text-sm">
@@ -1231,7 +1804,7 @@
                 </div>
 
                 <!-- iPad Menu -->
-                <div id="ipad-menu" class="col-span-4 grid grid-cols-4 gap-8 mega-submenu">
+                <div id="ipad-menu" class="col-span-4 grid grid-cols-1 md:grid-cols-4 gap-8 mega-submenu">
                     <div>
                         <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Explore</h3>
                         <ul class="space-y-2 text-gray-800 text-sm">
@@ -1273,7 +1846,7 @@
                 </div>
 
                 <!-- iPhone Menu -->
-                <div id="iphone-menu" class="col-span-4 grid grid-cols-4 gap-8 mega-submenu">
+                <div id="iphone-menu" class="col-span-4 grid grid-cols-1 md:grid-cols-4 gap-8 mega-submenu">
                     <div>
                         <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Explore</h3>
                         <ul class="space-y-2 text-gray-800 text-sm">
@@ -1315,7 +1888,7 @@
                 </div>
 
                 <!-- Watch Menu -->
-                <div id="watch-menu" class="col-span-4 grid grid-cols-4 gap-8 mega-submenu">
+                <div id="watch-menu" class="col-span-4 grid grid-cols-1 md:grid-cols-4 gap-8 mega-submenu">
                     <div>
                         <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Explore</h3>
                         <ul class="space-y-2 text-gray-800 text-sm">
@@ -1355,7 +1928,7 @@
                 </div>
 
                 <!-- AirPods Menu -->
-                <div id="airpods-menu" class="col-span-4 grid grid-cols-4 gap-8 mega-submenu">
+                <div id="airpods-menu" class="col-span-4 grid grid-cols-1 md:grid-cols-4 gap-8 mega-submenu">
                     <div>
                         <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Explore</h3>
                         <ul class="space-y-2 text-gray-800 text-sm">
@@ -1395,7 +1968,7 @@
                 </div>
 
                 <!-- Support Menu -->
-                <div id="support-menu" class="col-span-4 grid grid-cols-4 gap-8 mega-submenu">
+                <div id="support-menu" class="col-span-4 grid grid-cols-1 md:grid-cols-4 gap-8 mega-submenu">
                     <div>
                         <h3 class="text-xs text-gray-500 uppercase mb-4 font-semibold">Get Help</h3>
                         <ul class="space-y-2 text-gray-800 text-sm">
@@ -1452,18 +2025,18 @@
                 
                 <div class="absolute inset-x-0 bottom-0 w-full h-[40%] z-10 flex flex-col items-center justify-start text-center px-4">
                     
-                    <h1 style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif; font-weight: 600; font-size: 52px; line-height: 1.07143; letter-spacing: -0.005em; color: #1D1D1F; margin: 0;">
+                    <h1 style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif; font-weight: 600; font-size: clamp(36px, 5vw, 52px); line-height: 1.07143; letter-spacing: -0.005em; color: #1D1D1F; margin: 0;">
                         Revive the Magic.<br>
                         Rediscover the Power.
                     </h1>
             
-                    <p style="max-width: 800px; margin-top: 16px; margin-bottom: 0; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif; font-weight: 400; font-size: 16px; line-height: 1.381; letter-spacing: 0.011em; color: #424245;">
+                    <p style="max-width: 100%; margin-top: 16px; margin-bottom: 0; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif; font-weight: 400; font-size: 16px; line-height: 1.381; letter-spacing: 0.011em; color: #424245;">
                         Your Apple devices are designed to last. Whether you need expert restoration or the<br>
                         latest innovation, we bring your ecosystem back to life. Seamless service. Genuine<br>
                         parts. The experience you expect, preserved.
                     </p>
             
-                    <div class="flex items-center gap-[20px] mt-[20px]">
+                    <div class="flex items-center flex-col md:flex-row gap-4 mt-6">
                         <a href="#" class="first-cta-btn rounded-full text-white font-medium transition-all hover:opacity-90" 
                            style="background:#0071E3; font-size: 17px; padding: 10px 22px; font-family: -apple-system, sans-serif;">
                             Book a Service
@@ -1518,23 +2091,23 @@
     <section class="bg-white py-[80px] flex flex-col items-center overflow-hidden">
 
         <!-- Heading -->
-        <div class="w-full pl-[108px] pr-[108px] mb-[40px]">
+        <div class="w-full px-4 md:px-[108px] mb-[40px]">
             <div class="sf-section-eyebrow">Shop Iphone.</div>
             <div class="sf-section-h2">Designed to be loved.</div>
         </div>
 
         <!-- Scroll Area -->
-        <div class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-[20px] scroll-pl-[108px]">
-            <div class="flex w-max gap-[24px] pl-[108px] pr-[108px]">
+        <div class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-[20px] scroll-pl-4 md:scroll-pl-[108px]">
+            <div class="flex w-max gap-[24px] px-4 md:px-[108px]">
 
                 <!-- Editorial Card -->
                 <div
-                    class="w-[420px] h-[500px] rounded-[18px] overflow-hidden flex-shrink-0 snap-start shadow-sm hover:shadow-md transition duration-300">
+                    class="w-[280px] md:w-[420px] h-[500px] rounded-[18px] overflow-hidden flex-shrink-0 snap-start shadow-sm hover:shadow-md transition duration-300">
                     <img src="./imgdrive/shopiphone.webp" class="w-full h-full object-cover" alt="Shop iPhone" />
                 </div>
 
                 <!-- Product Card: iPhone 17 Pro Max -->
-                <div class="product-card w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300"
+                <div class="product-card w-[280px] md:w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300"
                     data-selected="./imgdrive/Iphone/17pro/iphone17problue.webp">
                     <div class="h-[320px] bg-white flex items-center justify-center rounded-t-[18px]">
                         <img src="./imgdrive/Iphone/17pro/iphone17problue.webp"
@@ -1561,7 +2134,7 @@
                 </div>
 
                 <!-- Product Card: iPhone 17 Pro -->
-                <div class="product-card w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300"
+                <div class="product-card w-[280px] md:w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300"
                     data-selected="./imgdrive/Iphone/17pro/iphone17procosmicorange.webp">
                     <div class="h-[320px] bg-white flex items-center justify-center rounded-t-[18px]">
                         <img src="./imgdrive/Iphone/17pro/iphone17procosmicorange.webp"
@@ -1588,7 +2161,7 @@
                 </div>
 
                 <!-- Product Card: iPhone 17 -->
-                <div class="product-card w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300"
+                <div class="product-card w-[280px] md:w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300"
                     data-selected="./imgdrive/Iphone/17/iphone17black.webp">
                     <div class="h-[320px] bg-white flex items-center justify-center rounded-t-[18px]">
                         <img src="./imgdrive/Iphone/17/iphone17black.webp"
@@ -1618,7 +2191,7 @@
                 </div>
 
                 <!-- Product Card: iPhone 17 Air -->
-                <div class="product-card w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300"
+                <div class="product-card w-[280px] md:w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300"
                     data-selected="./idphoneAir/offwhitttee-scaled.webp">
                     <div class="h-[320px] bg-white flex items-center justify-center rounded-t-[18px]">
                         <img src="./idphoneAir/offwhitttee-scaled.webp"
@@ -1655,7 +2228,7 @@
     <section class="bg-white py-[80px] flex flex-col overflow-hidden">
 
         <!-- Heading -->
-        <div class="w-full pl-[108px] pr-[108px] mb-[40px]">
+        <div class="w-full px-4 md:px-[108px] mb-[40px]">
             <div class="reveal">
                 <div class="sf-section-eyebrow">Discover Mac.</div>
                 <div class="sf-section-h2">
@@ -1665,19 +2238,19 @@
         </div>
 
         <!-- Scroll Area -->
-        <div class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-[20px] scroll-pl-[108px]">
+        <div class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-[20px] scroll-pl-4 md:scroll-pl-[108px]">
 
-            <div class="flex w-max gap-[24px] pl-[108px] pr-[108px] pt-2 reveal reveal-delay-1">
+            <div class="flex w-max gap-[24px] px-4 md:px-[108px] pt-2 reveal reveal-delay-1">
 
                 <!-- ✅ FIRST CARD (MATCHES IPHONE SECTION SIZE) -->
                 <div
-                    class="w-[420px] h-[500px] rounded-[18px] overflow-hidden flex-shrink-0 snap-start shadow-sm hover:shadow-md transition duration-300">
+                    class="w-[280px] md:w-[420px] h-[500px] rounded-[18px] overflow-hidden flex-shrink-0 snap-start shadow-sm hover:shadow-md transition duration-300">
                     <img src="./imgdrive/discovermac.webp" class="w-full h-full object-cover" />
                 </div>
 
                 <!-- ✅ PRODUCT CARD -->
                 <div
-                    class="w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300 product-card">
+                    class="w-[280px] md:w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300 product-card">
 
                     <div class="h-[320px] bg-white flex items-center justify-center rounded-t-[18px]">
                         <img src="./imgdrive/macstudio.webp"
@@ -1703,7 +2276,7 @@
 
                 <!-- ✅ PRODUCT CARD 2 -->
                 <div
-                    class="w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300 product-card">
+                    class="w-[280px] md:w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300 product-card">
 
                     <div class="h-[320px] bg-white flex items-center justify-center rounded-t-[18px]">
                         <img src="./imgdrive/macbookpro.webp"
@@ -1729,7 +2302,7 @@
 
                 <!-- ✅ PRODUCT CARD 3 -->
                 <div
-                    class="w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300 product-card">
+                    class="w-[280px] md:w-[313px] h-[500px] bg-white rounded-[18px] shadow-sm flex flex-col flex-shrink-0 snap-start hover:shadow-md transition duration-300 product-card">
 
                     <div class="h-[320px] bg-white flex items-center justify-center rounded-t-[18px]">
                         <img src="./imgdrive/macbookair.webp"
@@ -1764,9 +2337,9 @@
 
             <div class="flex flex-col items-center gap-[24px]">
 
-                <img src="./imgdrive/watchseries%2010.webp" alt="Apple Watch Series 10" class="w-[284px] h-auto block">
+                <img src="./imgdrive/watchseries%2010.webp" alt="Apple Watch Series 10" class="w-[200px] md:w-[284px] h-auto block">
 
-                <p class="text-[#6E6E73] font-medium text-[23px] leading-[1.21] tracking-[0.216px] max-w-[606px]"
+                <p class="text-[#6E6E73] font-medium text-[23px] leading-[1.21] tracking-[0.216px] max-w-full md:max-w-[606px]"
                     style="font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;">
                     The largest, most advanced display we’ve ever created, yet it feels weightless on your wrist. It
                     watches over your health, connects you to your world, and motivates every move. A tiny device. A
@@ -1774,15 +2347,15 @@
                 </p>
             </div>
 
-            <div class="flex flex-row items-center gap-[20px]">
+            <div class="flex flex-col md:flex-row items-center gap-4">
                 <a href="#"
-                    class="watch-button inline-flex items-center justify-center px-[30px] h-[56px] min-w-[148px] border border-[#1D1D1F] rounded-full text-[17px] text-[#1D1D1F] transition-all duration-300 hover:bg-[#1D1D1F] hover:text-white"
+                    class="watch-button inline-flex items-center justify-center w-full md:w-auto px-[30px] h-[56px] min-w-[148px] border border-[#1D1D1F] rounded-full text-[17px] text-[#1D1D1F] transition-all duration-300 hover:bg-[#1D1D1F] hover:text-white"
                     style="font-family: 'SF Pro Text', sans-serif;">
                     Learn more
                 </a>
 
                 <a href="#"
-                    class="watch-button inline-flex items-center justify-center px-[30px] h-[56px] min-w-[136px] border border-[#1D1D1F] rounded-full text-[17px] text-[#1D1D1F] transition-all duration-300 hover:bg-[#1D1D1F] hover:text-white"
+                    class="watch-button inline-flex items-center justify-center w-full md:w-auto px-[30px] h-[56px] min-w-[136px] border border-[#1D1D1F] rounded-full text-[17px] text-[#1D1D1F] transition-all duration-300 hover:bg-[#1D1D1F] hover:text-white"
                     style="font-family: 'SF Pro Text', sans-serif;">
                     Buy Now
                 </a>
@@ -1806,12 +2379,12 @@
                 <div class="absolute inset-0 flex flex-col items-center justify-end pb-[52px] text-center px-6">
                     <div class="text-white text-[36px] font-semibold leading-tight">AirPods 4</div>
                     <div class="text-white/90 text-[17px] mt-2">Iconic sound. Next-level comfort.</div>
-                    <div class="mt-6 flex items-center gap-4">
+                    <div class="mt-6 flex flex-col md:flex-row items-center gap-4 w-full md:w-auto px-4 md:px-0">
                         <a href="#"
-                            class="watch-button inline-flex items-center justify-center px-[30px] h-[48px] border border-white rounded-full text-[15px] text-white hover:bg-white hover:text-black transition-all duration-300">Learn
+                            class="watch-button inline-flex items-center justify-center w-full md:w-auto px-[30px] h-[48px] border border-white rounded-full text-[15px] text-white hover:bg-white hover:text-black transition-all duration-300">Learn
                             more</a>
                         <a href="#"
-                            class="watch-button inline-flex items-center justify-center px-[30px] h-[48px] border border-white rounded-full text-[15px] text-white hover:bg-white hover:text-black transition-all duration-300">Buy</a>
+                            class="watch-button inline-flex items-center justify-center w-full md:w-auto px-[30px] h-[48px] border border-white rounded-full text-[15px] text-white hover:bg-white hover:text-black transition-all duration-300">Buy</a>
                     </div>
                 </div>
             </div>
@@ -1822,10 +2395,10 @@
     <section class="py-[80px] bg-white flex flex-col overflow-hidden">
 
         <!-- Heading and Navigation -->
-        <div class="w-full pl-[108px] pr-[108px] mb-[40px]">
+        <div class="w-full px-4 md:px-[108px] mb-[40px]">
             <div class="reveal">
                 <div class="sf-section-eyebrow mb-[12px]">Service</div>
-                <div class="sf-section-h2 w-[695px]">
+                <div class="sf-section-h2 w-full md:w-[695px] max-w-full">
                     Fast turnarounds without cutting a single corner.
                 </div>
             </div>
@@ -1835,17 +2408,17 @@
 
  
         <div id="service-scroll-area"
-class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-[108px] pb-[20px]">
+class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-4 md:scroll-pl-[108px] pb-[20px]">
 
 <div id="service-scroll-container"
-    class="flex w-max gap-[20px] pl-[108px] pr-[108px] pt-2 reveal reveal-delay-1">
+    class="flex w-max gap-[20px] px-4 md:px-[108px] pt-2 reveal reveal-delay-1">
 
     <div
-        class="min-w-[372px] w-[372px] h-[600px] bg-black rounded-[24px] relative overflow-hidden snap-start hover-lift cursor-pointer flex-shrink-0 group shadow-card">
+        class="min-w-[280px] md:w-[372px] w-[280px] md:w-[372px] h-[600px] bg-black rounded-[24px] relative overflow-hidden snap-start hover-lift cursor-pointer flex-shrink-0 group shadow-card">
         <img src="./imgdrive/card01.webp"
             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/20"></div>
-        <div class="absolute left-[32px] top-[32px] w-[306px] flex flex-col gap-[8px] z-10">
+        <div class="absolute left-[32px] top-[32px] w-[200px] md:w-[306px] flex flex-col gap-[8px] z-10">
             <div class="text-white" style="font-weight:600;font-size:17px;line-height:21px;">
                 Precision.
             </div>
@@ -1856,11 +2429,11 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-[10
     </div>
 
     <div
-        class="min-w-[372px] w-[372px] h-[600px] bg-[#2A2A2A] rounded-[24px] relative overflow-hidden snap-start hover-lift cursor-pointer flex-shrink-0 group shadow-card">
+        class="min-w-[280px] md:w-[372px] w-[280px] md:w-[372px] h-[600px] bg-[#2A2A2A] rounded-[24px] relative overflow-hidden snap-start hover-lift cursor-pointer flex-shrink-0 group shadow-card">
         <img src="./imgdrive/card02.webp"
             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/60"></div>
-        <div class="absolute left-[32px] top-[32px] w-[306px] flex flex-col gap-[8px] z-10">
+        <div class="absolute left-[32px] top-[32px] w-[200px] md:w-[306px] flex flex-col gap-[8px] z-10">
             <div class="text-white" style="font-weight:600;font-size:17px;line-height:21px;">
                 Genuine.
             </div>
@@ -1871,12 +2444,12 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-[10
     </div>
 
     <div
-        class="min-w-[372px] w-[372px] h-[600px] bg-gradient-to-br from-[#1a3a5c] to-[#0f1f35] rounded-[24px] relative overflow-hidden snap-start hover-lift cursor-pointer flex-shrink-0 group shadow-card">
+        class="min-w-[280px] md:w-[372px] w-[280px] md:w-[372px] h-[600px] bg-gradient-to-br from-[#1a3a5c] to-[#0f1f35] rounded-[24px] relative overflow-hidden snap-start hover-lift cursor-pointer flex-shrink-0 group shadow-card">
         <img src="./imgdrive/card03.webp"
             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-b from-blue-950/40 via-transparent to-blue-950/60">
         </div>
-        <div class="absolute left-[32px] top-[32px] w-[306px] flex flex-col gap-[8px] z-10">
+        <div class="absolute left-[32px] top-[32px] w-[200px] md:w-[306px] flex flex-col gap-[8px] z-10">
             <div class="text-white" style="font-weight:600;font-size:17px;line-height:21px;">
                 Speed.
             </div>
@@ -1887,11 +2460,11 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-[10
     </div>
 
     <div
-        class="min-w-[372px] w-[372px] h-[600px] bg-black rounded-[24px] relative overflow-hidden snap-start hover-lift cursor-pointer flex-shrink-0 group shadow-card">
+        class="min-w-[280px] md:w-[372px] w-[280px] md:w-[372px] h-[600px] bg-black rounded-[24px] relative overflow-hidden snap-start hover-lift cursor-pointer flex-shrink-0 group shadow-card">
         <img src="./imgdrive/card05.webp"
             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/20"></div>
-        <div class="absolute left-[32px] top-[32px] w-[306px] flex flex-col gap-[8px] z-10">
+        <div class="absolute left-[32px] top-[32px] w-[200px] md:w-[306px] flex flex-col gap-[8px] z-10">
             <div class="text-white" style="font-weight:600;font-size:17px;line-height:21px;">
                 Transparency.
             </div>
@@ -1905,7 +2478,7 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-[10
 </div>
 
         <!-- Scroll Buttons -->
-        <div class="w-full flex justify-end gap-[16px] mt-[32px] pr-[108px]">
+        <div class="w-full flex justify-end gap-[16px] mt-[32px] pr-4 md:pr-[108px]">
             <button id="service-scroll-left-bottom"
                 class="w-[44px] h-[44px] rounded-full bg-[#F5F5F7] flex items-center justify-center hover:bg-[#E8E8ED] transition">
                 <i data-lucide="chevron-left" class="w-[24px] h-[24px]"></i>
@@ -1919,7 +2492,7 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-[10
     </section>
     <!-- Section: Magical Connections (Essential Add-ons) -->
     <section class="bg-white py-[80px] flex flex-col items-center overflow-hidden">
-        <div class="w-full px-[108px] mb-[40px]">
+        <div class="w-full px-4 md:px-[108px] mb-[40px]">
 
             <!-- Heading -->
             <div class="reveal">
@@ -1933,11 +2506,11 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-[10
 
         <!-- Scroll Container -->
         <div
-            class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-[20px] scroll-pl-[108px] pt-2 reveal reveal-delay-1 px-[108px] flex gap-[20px]">
+            class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-[20px] scroll-pl-4 md:scroll-pl-[108px] pt-2 reveal reveal-delay-1 px-4 md:px-[108px] flex gap-[20px]">
 
             <!-- ✅ FIRST CARD (ONLY IMAGE, FULL COVER) -->
             <div
-                class="w-[400px] h-[500px] rounded-[18px] overflow-hidden flex-shrink-0 snap-start shadow-md hover:shadow-xl transition duration-300">
+                class="w-[280px] md:w-[280px] md:w-[400px] h-[500px] rounded-[18px] overflow-hidden flex-shrink-0 snap-start shadow-md hover:shadow-xl transition duration-300">
                 <img src="./imgdrive/essential-addons.webp" alt="Accessories"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
             </div>
@@ -1945,12 +2518,12 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-[10
 
             <!-- ✅ PRODUCT CARD -->
             <div
-                class="w-[313px] h-[500px] bg-white rounded-[18px] shadow-md flex flex-col flex-shrink-0 snap-start hover:shadow-xl transition duration-300 group">
+                class="w-[280px] md:w-[313px] h-[500px] bg-white rounded-[18px] shadow-md flex flex-col flex-shrink-0 snap-start hover:shadow-xl transition duration-300 group">
 
                 <!-- IMAGE (70%) -->
                 <div class="h-[350px] flex items-center justify-center rounded-t-[18px]">
                     <img src="./imgdrive/mackeyboardblack.webp"
-                        class="max-w-[230px] object-contain transition-transform duration-500 group-hover:scale-110" />
+                        class="max-w-[200px] md:max-w-[230px] object-contain transition-transform duration-500 group-hover:scale-110" />
                 </div>
 
                 <!-- CONTENT (30%) -->
@@ -1972,11 +2545,11 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-[10
 
             <!-- ✅ PRODUCT CARD 2 -->
             <div
-                class="w-[313px] h-[500px] bg-white rounded-[18px] shadow-md flex flex-col flex-shrink-0 snap-start hover:shadow-xl transition duration-300 group">
+                class="w-[280px] md:w-[313px] h-[500px] bg-white rounded-[18px] shadow-md flex flex-col flex-shrink-0 snap-start hover:shadow-xl transition duration-300 group">
 
                 <div class="h-[350px] flex items-center justify-center rounded-t-[18px]">
                     <img src="./imgdrive/iphoneaccessories.webp"
-                        class="max-w-[230px] object-contain transition-transform duration-500 group-hover:scale-110" />
+                        class="max-w-[200px] md:max-w-[230px] object-contain transition-transform duration-500 group-hover:scale-110" />
                 </div>
 
                 <div class="flex flex-col px-6 py-5">
@@ -1994,11 +2567,11 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-[10
                 </div>
             </div>
             <div
-                class="w-[313px] h-[500px] bg-white rounded-[18px] shadow-md flex flex-col flex-shrink-0 snap-start hover:shadow-xl transition duration-300 group">
+                class="w-[280px] md:w-[313px] h-[500px] bg-white rounded-[18px] shadow-md flex flex-col flex-shrink-0 snap-start hover:shadow-xl transition duration-300 group">
 
                 <div class="h-[350px] flex items-center justify-center rounded-t-[18px]">
                     <img src="./imgdrive/ipadkeyboard.webp"
-                        class="max-w-[230px] object-contain transition duration-500 group-hover:scale-110" />
+                        class="max-w-[200px] md:max-w-[230px] object-contain transition duration-500 group-hover:scale-110" />
                 </div>
 
                 <div class="flex flex-col px-6 py-5">
@@ -2020,50 +2593,50 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-[10
 
     <!-- Section: Device Issues (Help me choose) -->
     <section class="py-[80px] bg-white flex flex-col items-center w-full">
-        <div class="w-full px-[108px] mb-[40px]">
-            <div class="sf-section-h2 w-[622px] reveal">Broken Screen?<br>We've got your back.</div>
+        <div class="w-full px-4 md:px-[108px] mb-[40px]">
+            <div class="sf-section-h2 w-full md:w-[622px] max-w-full text-center md:text-left text-[32px] md:text-[42.14px] leading-tight md:leading-[60px] reveal">Broken Screen?<br>We've got your back.</div>
         </div>
 
-        <div class="w-full px-[108px]">
+        <div class="w-full px-4 md:px-[108px]">
             <div class="flex flex-col gap-[20px] w-full reveal reveal-delay-1">
                 <!-- Top Big Banner -->
                 <div
-                    class="w-full h-[631px] rounded-[24px] relative overflow-hidden bg-black hover-lift cursor-pointer  ">
+                    class="w-full h-[400px] md:h-[631px] rounded-[24px] relative overflow-hidden bg-black hover-lift cursor-pointer  ">
                     <img src="./imgdrive/large.webp"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     <!-- overlay removed to keep image bright -->
-                    <div class="absolute left-[50px] bottom-[80px] w-full max-w-[537px] flex flex-col gap-[24px] z-10">
-                        <h3 class="font-bold text-[30.875px] leading-[36px] tracking-[0.128px] text-white w-[428px]">
+                    <div class="absolute left-4 md:left-[50px] bottom-8 md:bottom-[80px] w-full max-w-full md:w-[537px] max-w-full flex flex-col gap-[24px] z-10">
+                        <h3 class="font-bold text-[24px] md:text-[30.875px] leading-[36px] tracking-[0.128px] text-white w-full md:w-[428px] max-w-full pb-4">
                             Accidents happen. We fix them fast.</h3>
                         <a href="#" class="btn-primary sf-button-text w-fit">Get an Estimate</a>
                     </div>
                 </div>
 
                 <!-- Bottom 2 Cards -->
-                <div class="flex flex-row gap-[20px] w-full h-auto">
+                <div class="flex flex-col md:flex-row gap-[20px] w-full h-auto">
                     <div
-                        class="w-[58%] h-[500px] bg-white rounded-[24px] shadow-card relative overflow-hidden hover-lift cursor-pointer group">
+                        class="w-full md:w-[58%] h-[500px] bg-white rounded-[24px] shadow-card relative overflow-hidden hover-lift cursor-pointer group">
                         <img src="./imgdrive/large2.webp"
                             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         <!-- overlay removed to keep image bright -->
-                        <div class="absolute top-[50px] left-[59px] z-10 max-w-[400px]">
+                        <div class="absolute top-8 md:top-[50px] left-4 md:left-[59px] z-10 w-[200px] md:w-[400px]">
                             <div class="sf-section-eyebrow text-white mb-[8px]">Find Your Store</div>
                             <p class="sf-service-h3 text-white">Expert service closer than you think.</p>
                         </div>
-                        <a href="#" class="btn-primary sf-button-text absolute bottom-[54px] left-[59px] z-10">Walk In
+                        <a href="#" class="btn-primary sf-button-text absolute bottom-8 md:bottom-[54px] left-4 md:left-[59px] z-10">Walk In
                             Today</a>
                     </div>
 
                     <div
-                        class="w-[42%] h-[500px] bg-white rounded-[24px] shadow-card relative overflow-hidden hover-lift cursor-pointer group">
+                        class="w-full md:w-[42%] h-[500px] bg-white rounded-[24px] shadow-card relative overflow-hidden hover-lift cursor-pointer group">
                         <img src="./imgdrive/large3.webp"
                             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         <!-- overlay removed and brightness reset to keep image bright -->
-                        <div class="absolute top-[52px] left-[52px] z-10 max-w-[300px]">
+                        <div class="absolute top-8 md:top-[52px] left-4 md:left-[52px] z-10 max-w-full md:max-w-[300px]">
                             <div class="sf-section-eyebrow text-white mb-[8px]">Certified professionals</div>
                             <p class="sf-service-h3 text-white text-[24px] leading-8">Your device in expert hands.</p>
                         </div>
-                        <a href="#" class="btn-primary sf-button-text absolute bottom-[52px] left-[52px] z-10">Schedule
+                        <a href="#" class="btn-primary sf-button-text absolute bottom-8 md:bottom-[52px] left-4 md:left-[52px] z-10">Schedule
                             Now</a>
                     </div>
                 </div>
@@ -2073,52 +2646,52 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-[10
 
     <!-- 3 Div Section (Stats) -->
     <section class="w-full bg-white flex justify-center">
-        <div class="w-full max-w-[1440px] h-[444px] flex items-center justify-center">
-            <div class="flex flex-row items-center justify-between gap-[123px] w-[1296px]">
+        <div class="w-full max-w-[1440px] h-auto md:h-[444px] py-12 md:py-0 flex items-center justify-center">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-[40px] md:gap-[123px] w-full md:w-full max-w-[1296px]">
 
-                <div class="flex flex-col items-center gap-[10px] w-[350px] h-[256.94px] reveal text-center">
+                <div class="flex flex-col items-center gap-[10px] w-full md:w-[350px] h-[256.94px] reveal text-center">
                     <div
                         class="w-[40px] h-[44px] rounded-full bg-gradient-to-br from-apple-blue/10 to-apple-blueLight/10 flex items-center justify-center mb-[6px]">
                         <i data-lucide="wrench" class="w-6 h-6 text-apple-blue stroke-[1.5]"></i>
                     </div>
-                    <p class="sf-stats-h3" style="width:318px;">5,000+ Devices Restored.</p>
-                    <div class="w-[350px] h-[120.94px] flex items-center justify-center">
-                        <p class="sf-stats-p" style="width:353px;">We've breathed new life into thousands of iPhones,
+                    <p class="sf-stats-h3" style="max-width: 100%;">5,000+ Devices Restored.</p>
+                    <div class="w-full md:w-[350px] h-[120.94px] flex items-center justify-center">
+                        <p class="sf-stats-p" style="max-width: 100%;">We've breathed new life into thousands of iPhones,
                             Macs, and iPads.</p>
                     </div>
-                    <div class="flex items-start justify-center" style="width:170px; height:37px;">
+                    <div class="flex items-start justify-center" style="max-width: 100%; height:37px;">
                         <a href="#" class="sf-stats-link">Start Repair</a>
                     </div>
                 </div>
 
                 <div
-                    class="flex flex-col items-center gap-[10px] w-[350px] h-[256.94px] reveal reveal-delay-1 text-center">
+                    class="flex flex-col items-center gap-[10px] w-full md:w-[350px] h-[256.94px] reveal reveal-delay-1 text-center">
                     <div
                         class="w-[40px] h-[44px] rounded-full bg-gradient-to-br from-apple-blue/10 to-apple-blueLight/10 flex items-center justify-center mb-[6px]">
                         <i data-lucide="shield-check" class="w-6 h-6 text-apple-blue stroke-[1.5]"></i>
                     </div>
-                    <p class="sf-stats-h3 sf-stats-h3-wide" style="width:300px;">100% Genuine Inventory.</p>
-                    <div class="w-[350px] h-[120.94px] flex items-center justify-center">
-                        <p class="sf-stats-p" style="width:393px;">Every screen, battery, and chip comes directly from
+                    <p class="sf-stats-h3 sf-stats-h3-wide" style="max-width: 100%;">100% Genuine Inventory.</p>
+                    <div class="w-full md:w-[350px] h-[120.94px] flex items-center justify-center">
+                        <p class="sf-stats-p" style="max-width: 100%;">Every screen, battery, and chip comes directly from
                             Apple. Authenticity you can trust, performance you can feel.</p>
                     </div>
-                    <div class="flex items-start justify-center" style="width:157px; height:37px;">
+                    <div class="flex items-start justify-center" style="max-width: 100%; height:37px;">
                         <a href="#" class="sf-stats-link">Shop Products</a>
                     </div>
                 </div>
 
                 <div
-                    class="flex flex-col items-center gap-[10px] w-[350px] h-[256.94px] reveal reveal-delay-2 text-center">
+                    class="flex flex-col items-center gap-[10px] w-full md:w-[350px] h-[256.94px] reveal reveal-delay-2 text-center">
                     <div
                         class="w-[40px] h-[44px] rounded-full bg-gradient-to-br from-apple-blue/10 to-apple-blueLight/10 flex items-center justify-center mb-[6px]">
                         <i data-lucide="map-pin" class="w-6 h-6 text-apple-blue stroke-[1.5]"></i>
                     </div>
-                    <p class="sf-stats-h3 sf-stats-h3-wide" style="width:304px;">5 Convenient Locations.</p>
-                    <div class="w-[350px] h-[120.94px] flex items-center justify-center">
-                        <p class="sf-stats-p" style="width:333px;">Expert service is closer than you think. Walk in with
+                    <p class="sf-stats-h3 sf-stats-h3-wide" style="max-width: 100%;">5 Convenient Locations.</p>
+                    <div class="w-full md:w-[350px] h-[120.94px] flex items-center justify-center">
+                        <p class="sf-stats-p" style="max-width: 100%;">Expert service is closer than you think. Walk in with
                             a problem, walk out with peace of mind.</p>
                     </div>
-                    <div class="flex items-start justify-center" style="width:116.9px; height:37px;">
+                    <div class="flex items-start justify-center" style="max-width: 100%; height:37px;">
                         <a href="#" class="sf-stats-link">Find a Store</a>
                     </div>
                 </div>
@@ -2134,11 +2707,11 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-[10
             <div class="flex flex-col items-center gap-[20px]">
                 <div class="text-center">
                     <div
-                        style="font-size: 28px; font-weight: 600; line-height: 1.3; letter-spacing: -0.28px; color: #1D1D1F; margin-bottom: 4px;">
+                        style="font-size: clamp(20px, 4vw, 28px); font-weight: 600; line-height: 1.3; letter-spacing: -0.28px; color: #1D1D1F; margin-bottom: 4px;">
                         Waiting on a miracle?
                     </div>
                     <div
-                        style="font-size: 28px; font-weight: 600; line-height: 1.3; letter-spacing: -0.28px; color: #1D1D1F;">
+                        style="font-size: clamp(20px, 4vw, 28px); font-weight: 600; line-height: 1.3; letter-spacing: -0.28px; color: #1D1D1F;">
                         We're working on it.
                     </div>
                 </div>
@@ -2149,7 +2722,7 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-[10
                     from diagnosis to the final polish.
                 </p>
             </div>
-            <div class="flex flex-row items-center justify-center gap-[64px]">
+            <div class="flex flex-row items-center justify-center flex-col md:flex-row gap-6 md:gap-[64px]">
                 <a href="#"
                     style="color: #0071E3; text-decoration: none; font-size: 15px; font-weight: 500; letter-spacing: -0.24px; transition: opacity 0.2s;"
                     class="hover:opacity-80">
@@ -2168,7 +2741,7 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-[10
     <footer class="bg-white pt-[50px] pb-[20px] px-[1rem] border-t border-[#d5d5d7]">
         <div class="max-w-[1280px] mx-auto px-[1rem]">
             <!-- Footer Content Grid -->
-            <div class="grid grid-cols-7 gap-12 mb-[64px]">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-8 md:gap-12 mb-[64px]">
                 <!-- Shop and Learn -->
                 <div class="flex flex-col gap-[16px]">
                     <h4

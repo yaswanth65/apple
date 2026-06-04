@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     if (serviceScrollContainer) {
-        const scrollAmount = 392; // Card width (372px) + gap (20px)
+        const scrollAmount = window.innerWidth < 768 ? 300 : 392; // Responsive card width + gap
 
         serviceButtons.forEach(buttonSet => {
             if (buttonSet.left && buttonSet.right) {
@@ -141,4 +141,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const first = card.querySelector('.color-swatch');
         if (first) first.click();
     });
+
+    // Mobile Menu Toggle Logic
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navLinks = document.getElementById('nav-links');
+    
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', () => {
+            if (navLinks.classList.contains('hidden')) {
+                navLinks.classList.remove('hidden', 'md:flex');
+                navLinks.classList.add('flex', 'flex-col', 'absolute', 'top-12', 'left-0', 'w-full', 'bg-white', 'p-4', 'shadow-md', 'z-50');
+                // Remove space-x-8 and add space-y-4 for mobile
+                navLinks.classList.remove('space-x-8');
+                navLinks.classList.add('space-y-4', 'items-start');
+            } else {
+                navLinks.classList.add('hidden', 'md:flex');
+                navLinks.classList.remove('flex', 'flex-col', 'absolute', 'top-12', 'left-0', 'w-full', 'bg-white', 'p-4', 'shadow-md', 'z-50');
+                // Restore desktop spacing
+                navLinks.classList.add('space-x-8');
+                navLinks.classList.remove('space-y-4', 'items-start');
+            }
+        });
+    }
 });
