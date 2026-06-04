@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IHDM</title>
+    <title>iHustle</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -316,6 +316,22 @@
                 padding-bottom: 40px !important;
             }
 
+            /* Standardize AirPods section to match */
+            section[class*="py-\[28px\]"] {
+                padding-top: 40px !important;
+                padding-bottom: 40px !important;
+            }
+
+            /* Standardize Stats section to match */
+            .stats-section {
+                padding-top: 40px !important;
+                padding-bottom: 40px !important;
+            }
+            .stats-section > div {
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
+            }
+
             /* Margin adjustments */
             div[class*="mb-\[40px\]"] {
                 margin-bottom: 24px !important;
@@ -326,81 +342,30 @@
                 gap: 32px !important;
             }
 
+            /* Margin below hero on mobile */
+            #heroSlider {
+                margin-bottom: 40px !important;
+            }
+
             /* Watch section */
-            div[class*="pt-24"] {
+            div[class*="pt-24"],
+            section[class*="pt-24"] {
                 padding-top: 16px !important;
             }
 
-            div[class*="min-h-screen"] {
+            div[class*="min-h-screen"],
+            section[class*="min-h-screen"] {
                 min-height: auto !important;
+                padding-bottom: 16px !important;
             }
 
-            /* Button sizing */
-            a[class*="watch-button"],
-            button[class*="h-\[56px\]"],
-            a[class*="h-\[56px\]"] {
-                height: 48px !important;
-                font-size: 14px !important;
+            /* Reduce Watch section gaps on mobile */
+            div[class*="gap-\[56px\]"] {
+                gap: 24px !important;
             }
 
-            a[class*="h-\[48px\]"],
-            button[class*="h-\[48px\]"] {
-                font-size: 14px !important;
-            }
-
-            /* Text sizing */
-            p[class*="text-\[23px\]"] {
-                font-size: 18px !important;
-            }
-
-            p[class*="text-\[26.9px\]"] {
-                font-size: 20px !important;
-            }
-
-            .text-\[36px\] {
-                font-size: 28px !important;
-            }
-
-            .text-\[17px\] {
-                font-size: 15px !important;
-            }
-
-            /* Flex direction for stacked layouts */
-            div[class*="md:flex-row"] {
-                flex-direction: column !important;
-            }
-
-            div[class*="md:flex-row"] > * {
-                width: 100% !important;
-            }
-
-            /* Watch image */
-            img[class*="w-\[200px\]"][class*="md:w-\[284px\]"] {
-                width: 160px !important;
-            }
-
-            /* Container max widths */
-            div[class*="max-w-\[606px\]"] {
-                max-width: 100% !important;
-            }
-
-            /* Hero adjustments */
-            .hero-light .hero-image-wrap {
-                height: 50% !important;
-            }
-
-            .hero-light .hero-copy-wrap {
-                height: 50% !important;
-                padding: 12px 16px 16px !important;
-            }
-
-            .hero-slide[data-hero-index="0"] .hero-image-wrap {
-                height: 54% !important;
-            }
-
-            .hero-slide[data-hero-index="0"] .hero-copy-wrap {
-                height: 46% !important;
-                margin-top: -30px !important;
+            .relative.mt-12 {
+                margin-top: 24px !important;
             }
         }
 
@@ -424,6 +389,20 @@
             section[class*="py-\[80px\]"] {
                 padding-top: 32px !important;
                 padding-bottom: 32px !important;
+            }
+
+            section[class*="py-\[28px\]"] {
+                padding-top: 32px !important;
+                padding-bottom: 32px !important;
+            }
+
+            .stats-section {
+                padding-top: 32px !important;
+                padding-bottom: 32px !important;
+            }
+            .stats-section > div {
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
             }
 
             div[class*="h-\[500px\]"] {
@@ -484,6 +463,29 @@
             div[class*="mb-\[40px\]"] {
                 margin-bottom: 16px !important;
             }
+
+            /* Mobile font size reductions */
+            .sf-section-h2 {
+                font-size: 24px !important;
+            }
+            .sf-section-eyebrow {
+                font-size: 14px !important;
+            }
+            .sf-stats-h3 {
+                font-size: 16px !important;
+            }
+            .sf-stats-p {
+                font-size: 16px !important;
+            }
+            .sf-service-h3 {
+                font-size: 20px !important;
+            }
+            .sf-card-title {
+                font-size: 14px !important;
+            }
+            .sf-card-price {
+                font-size: 12px !important;
+            }
         }
 
         @media (max-width: 480px) {
@@ -505,6 +507,20 @@
             section[class*="py-\[80px\]"] {
                 padding-top: 24px !important;
                 padding-bottom: 24px !important;
+            }
+
+            section[class*="py-\[28px\]"] {
+                padding-top: 24px !important;
+                padding-bottom: 24px !important;
+            }
+
+            .stats-section {
+                padding-top: 24px !important;
+                padding-bottom: 24px !important;
+            }
+            .stats-section > div {
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
             }
 
             div[class*="gap-\[24px\]"],
@@ -535,6 +551,29 @@
             }
 
             .hero-subtitle {
+                font-size: 12px !important;
+            }
+
+            /* Mobile font size reductions */
+            .sf-section-h2 {
+                font-size: 22px !important;
+            }
+            .sf-section-eyebrow {
+                font-size: 13px !important;
+            }
+            .sf-stats-h3 {
+                font-size: 15px !important;
+            }
+            .sf-stats-p {
+                font-size: 14px !important;
+            }
+            .sf-service-h3 {
+                font-size: 18px !important;
+            }
+            .sf-card-title {
+                font-size: 13px !important;
+            }
+            .sf-card-price {
                 font-size: 12px !important;
             }
 
@@ -1473,13 +1512,30 @@
                 gap: 12px !important;
             }
 
+            /* Margin below hero on mobile */
+            #heroSlider {
+                margin-bottom: 40px !important;
+            }
+
             /* Watch section cleanup */
-            div[class*="pt-24"] {
+            div[class*="pt-24"],
+            section[class*="pt-24"] {
                 padding-top: 16px !important;
             }
 
-            div[class*="min-h-screen"] {
+            div[class*="min-h-screen"],
+            section[class*="min-h-screen"] {
                 min-height: auto !important;
+                padding-bottom: 56px !important;
+            }
+
+            /* Reduce Watch section gaps on mobile */
+            div[class*="gap-\[56px\]"] {
+                gap: 24px !important;
+            }
+
+            .relative.mt-12 {
+                margin-top: 24px !important;
             }
 
             /* Button sizing */
@@ -1497,6 +1553,20 @@
             section[class*="py-\[80px\]"] {
                 padding-top: 40px !important;
                 padding-bottom: 40px !important;
+            }
+
+            section[class*="py-\[28px\]"] {
+                padding-top: 40px !important;
+                padding-bottom: 40px !important;
+            }
+
+            .stats-section {
+                padding-top: 40px !important;
+                padding-bottom: 40px !important;
+            }
+            .stats-section > div {
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
             }
 
             /* Margin adjustments */
@@ -1520,15 +1590,30 @@
                 padding: 12px 20px !important;
             }
 
-            /* Flex direction for buttons */
-            div[class*="md:flex-row"] {
-                flex-direction: column !important;
+            /* Mobile font size reductions */
+            .sf-section-h2 {
+                font-size: 28px !important;
+            }
+            .sf-section-eyebrow {
+                font-size: 15px !important;
+            }
+            .sf-stats-h3 {
+                font-size: 17px !important;
+            }
+            .sf-stats-p {
+                font-size: 18px !important;
+            }
+            .sf-service-h3 {
+                font-size: 22px !important;
+            }
+            .sf-card-title {
+                font-size: 15px !important;
+            }
+            .sf-card-price {
+                font-size: 13px !important;
             }
 
-            div[class*="md:flex-row"] > a {
-                width: 100% !important;
             }
-        }
 
         @media (max-width: 640px) {
             /* Extra small device optimizations */
@@ -1548,6 +1633,20 @@
             section[class*="py-\[80px\]"] {
                 padding-top: 32px !important;
                 padding-bottom: 32px !important;
+            }
+
+            section[class*="py-\[28px\]"] {
+                padding-top: 32px !important;
+                padding-bottom: 32px !important;
+            }
+
+            .stats-section {
+                padding-top: 32px !important;
+                padding-bottom: 32px !important;
+            }
+            .stats-section > div {
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
             }
 
             .product-card {
@@ -1580,6 +1679,29 @@
             div[class*="mb-\[40px\]"] {
                 margin-bottom: 16px !important;
             }
+
+            /* Mobile font size reductions */
+            .sf-section-h2 {
+                font-size: 24px !important;
+            }
+            .sf-section-eyebrow {
+                font-size: 14px !important;
+            }
+            .sf-stats-h3 {
+                font-size: 16px !important;
+            }
+            .sf-stats-p {
+                font-size: 16px !important;
+            }
+            .sf-service-h3 {
+                font-size: 20px !important;
+            }
+            .sf-card-title {
+                font-size: 14px !important;
+            }
+            .sf-card-price {
+                font-size: 12px !important;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1597,6 +1719,20 @@
             section[class*="py-\[80px\]"] {
                 padding-top: 24px !important;
                 padding-bottom: 24px !important;
+            }
+
+            section[class*="py-\[28px\]"] {
+                padding-top: 24px !important;
+                padding-bottom: 24px !important;
+            }
+
+            .stats-section {
+                padding-top: 24px !important;
+                padding-bottom: 24px !important;
+            }
+            .stats-section > div {
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
             }
 
             div[class*="h-\[500px\]"] {
@@ -1651,6 +1787,29 @@
             .hero-dark-desc {
                 font-size: 14px !important;
             }
+
+            /* Mobile font size reductions */
+            .sf-section-h2 {
+                font-size: 22px !important;
+            }
+            .sf-section-eyebrow {
+                font-size: 13px !important;
+            }
+            .sf-stats-h3 {
+                font-size: 15px !important;
+            }
+            .sf-stats-p {
+                font-size: 14px !important;
+            }
+            .sf-service-h3 {
+                font-size: 18px !important;
+            }
+            .sf-card-title {
+                font-size: 13px !important;
+            }
+            .sf-card-price {
+                font-size: 12px !important;
+            }
         }
 
         /* ===== GLOBAL TAG STYLES ===== */
@@ -1676,7 +1835,7 @@
         <div
             class="max-w-[1440px] w-full mx-auto px-4 md:px-8 flex justify-between items-center text-xs font-medium text-gray-800/75">
             <a href="#" class="hover:text-black transition duration-200 flex-shrink-0 font-bold text-lg">
-                IHDM INDIA
+                iHustle INDIA
             </a>
             <div class="hidden md:flex space-x-8" id="nav-links">
                 <button type="button" data-menu="store"
@@ -2015,7 +2174,27 @@
     <!-- Hero Slider Section -->
     <section class="w-full bg-white">
         <div id="heroSlider" class="relative w-full h-screen overflow-hidden">
-            <!-- Slide 1 -->
+            <!-- Slide 1 (New - Premium Cases) -->
+            <div class="hero-slide hero-dark absolute inset-0 w-full h-full bg-black" data-hero-index="3">
+                <img src="./newpics/newslidepc.png" alt="Premium Cases"
+                    srcset="./newpics/newslidemobile.png 768w, ./newpics/newslidepc.png 1920w"
+                    sizes="100vw"
+                    class="absolute inset-0 w-full h-full object-contain" />
+                <div class="hero-overlay"></div>
+                <div class="hero-copy-wrap relative z-10 flex flex-col items-center gap-[20px] px-6"
+                    style="max-width:660px; margin: 0 auto 0;">
+                    <p class="hero-dark-title">Premium Cases</p>
+                    <p class="hero-dark-subtitle">Designed for Everyday Hustlers</p>
+                    <p class="hero-dark-desc">Power that doesn't just keep up, it sets the pace. With the M3 chips, it
+                        handles the most demanding workflows with a quiet confidence. It's not just a laptop; it's a
+                        workspace that moves as fast as your imagination.</p>
+                    <div class="hero-btns">
+                        <a href="#" class="btn-primary sf-button-text cta-primary">Learn more</a>
+                        <a href="#" class="btn-secondary sf-button-text cta-secondary">Buy</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 2 -->
             <div class="hero-slide hero-light active absolute inset-0 w-full h-full" data-hero-index="0">
                 <img
                     src="./hero3imgs/Home-Page.webp"
@@ -2036,7 +2215,7 @@
                         parts. The experience you expect, preserved.
                     </p>
             
-                    <div class="flex items-center flex-col md:flex-row gap-4 mt-6">
+                    <div class="flex items-center flex-row gap-4 mt-6">
                         <a href="#" class="first-cta-btn rounded-full text-white font-medium transition-all hover:opacity-90" 
                            style="background:#0071E3; font-size: 17px; padding: 10px 22px; font-family: -apple-system, sans-serif;">
                             Book a Service
@@ -2052,7 +2231,9 @@
              
             <!-- Slide 2 -->
             <div class="hero-slide hero-dark absolute inset-0" data-hero-index="1">
-                <img src="./hero3imgs/Homepage 2.webp" alt="Hero Slide 2" class="hero-bg" />
+                <img src="./newpics/macslidepc.png" alt="MacBook Pro" class="hero-bg"
+                    srcset="./newpics/macslidemobile.png 768w, ./newpics/macslidepc.png 1920w"
+                    sizes="100vw" />
                 <div class="hero-overlay"></div>
                 <div class="hero-copy-wrap relative z-10 flex flex-col items-center gap-[20px] px-6"
                     style="max-width:660px; margin: 0 auto 0;">
@@ -2070,7 +2251,9 @@
 
             <!-- Slide 3 -->
             <div class="hero-slide hero-dark absolute inset-0" data-hero-index="2">
-                <img src="./hero3imgs/apple_airpods_max_8.webp" alt="Hero Slide 3" class="hero-bg" />
+                <img src="./newpics/airpodspc.png" alt="AirPods Max" class="hero-bg"
+                    srcset="./newpics/airpodsmobile.png 768w, ./newpics/airpodspc.png 1920w"
+                    sizes="100vw" />
                 <div class="hero-overlay"></div>
                 <div class="hero-copy-wrap relative z-10 flex flex-col items-center gap-[20px] px-6"
                     style="max-width:660px; margin: 0 auto 0;">
@@ -2087,6 +2270,69 @@
 
         </div>
     </section>
+
+    
+    <!-- iHustle Collection Section -->
+    <section class="bg-white py-[80px] flex flex-col overflow-hidden">
+        <!-- Heading -->
+        <div class="w-full px-4 md:px-[108px] mb-[40px]">
+            <div class="sf-section-eyebrow" style="margin-bottom: 8px;">Shop Categories.</div>
+            <div class="sf-section-h2" style="font-size: clamp(32px, 5vw, 48px); font-weight: 700; letter-spacing: -0.02em;">iHustle Collection</div>
+        </div>
+
+        <!-- Scroll Area -->
+        <div class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-[20px] scroll-pl-4 md:scroll-pl-[108px]">
+            <div class="flex w-max gap-[24px] px-4 md:px-[108px]">
+                
+                <!-- Card 1 -->
+                <div class="w-[280px] md:w-[313px] h-[200px] md:h-[217px] rounded-[8px] overflow-hidden flex-shrink-0 snap-start shadow-sm hover:shadow-md transition duration-300 relative group cursor-pointer border border-[#E5E5E7]">
+                    <img src="./newsection/image 234.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="iPhone Cases" />
+                    <div class="absolute top-4 left-4 flex gap-2">
+                        <div class="bg-white px-[12px] py-[6px] rounded-[6px] text-[11px] font-semibold tracking-wide text-black shadow-sm">IPHONE CASES</div>
+                        <div class="bg-white px-[12px] py-[6px] rounded-[6px] text-[11px] font-semibold tracking-wide text-black shadow-sm">12 PRODUCTS</div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="w-[280px] md:w-[313px] h-[200px] md:h-[217px] rounded-[8px] overflow-hidden flex-shrink-0 snap-start shadow-sm hover:shadow-md transition duration-300 relative group cursor-pointer border border-[#E5E5E7]">
+                    <img src="./newsection/image 235.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Lenses" />
+                    <div class="absolute top-4 left-4 flex gap-2">
+                        <div class="bg-white px-[12px] py-[6px] rounded-[6px] text-[11px] font-semibold tracking-wide text-black shadow-sm">LENSES</div>
+                        <div class="bg-white px-[12px] py-[6px] rounded-[6px] text-[11px] font-semibold tracking-wide text-black shadow-sm">4 PRODUCTS</div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="w-[280px] md:w-[313px] h-[200px] md:h-[217px] rounded-[8px] overflow-hidden flex-shrink-0 snap-start shadow-sm hover:shadow-md transition duration-300 relative group cursor-pointer border border-[#E5E5E7]">
+                    <img src="./newsection/image 236.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Screen Protector" />
+                    <div class="absolute top-4 left-4 flex gap-2">
+                        <div class="bg-white px-[12px] py-[6px] rounded-[6px] text-[11px] font-semibold tracking-wide text-black shadow-sm">SCREEN PROTECTOR</div>
+                        <div class="bg-white px-[12px] py-[6px] rounded-[6px] text-[11px] font-semibold tracking-wide text-black shadow-sm">6 PRODUCTS</div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="w-[280px] md:w-[313px] h-[200px] md:h-[217px] rounded-[8px] overflow-hidden flex-shrink-0 snap-start shadow-sm hover:shadow-md transition duration-300 relative group cursor-pointer border border-[#E5E5E7]">
+                    <img src="./newsection/image 237.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="iPhone" />
+                    <div class="absolute top-4 left-4 flex gap-2">
+                        <div class="bg-white px-[12px] py-[6px] rounded-[6px] text-[11px] font-semibold tracking-wide text-black shadow-sm">IPHONE</div>
+                        <div class="bg-white px-[12px] py-[6px] rounded-[6px] text-[11px] font-semibold tracking-wide text-black shadow-sm">18 PRODUCTS</div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="w-[280px] md:w-[313px] h-[200px] md:h-[217px] rounded-[8px] overflow-hidden flex-shrink-0 snap-start shadow-sm hover:shadow-md transition duration-300 relative group cursor-pointer border border-[#E5E5E7]">
+                    <img src="./newsection/image 234.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="iPhone Cases" />
+                    <div class="absolute top-4 left-4 flex gap-2">
+                        <div class="bg-white px-[12px] py-[6px] rounded-[6px] text-[11px] font-semibold tracking-wide text-black shadow-sm">IPHONE CASES</div>
+                        <div class="bg-white px-[12px] py-[6px] rounded-[6px] text-[11px] font-semibold tracking-wide text-black shadow-sm">12 PRODUCTS</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
 
     <section class="bg-white py-[80px] flex flex-col items-center overflow-hidden">
 
@@ -2209,15 +2455,7 @@
                             <div class="color-swatch rounded-full" style="background:#2A2A2A"
                                 data-image="./idphoneAir/deepblack-scaled.webp"
                                 aria-label="iPhone 17 Air Deep Black"></div>
-                        </div>
-                        <span class="sf-card-new mb-2">New</span>
-                        <h3 class="sf-card-title mb-1">iPhone 17 Air</h3>
-                        <p class="text-[14px] text-gray-600 mb-4">Ultra light. All day ready.</p>
-                        <p class="sf-card-price mt-auto">From ₹ 94,900</p>
-                    </div>
-                </div>
-
-            </div>
+                        </div></div>
         </div>
 
     </section>
@@ -2324,9 +2562,7 @@
                             From ₹ 99,900
                         </p>
                     </div>
-                </div>
-
-            </div>
+                </div></div>
         </div>
 
     </section>
@@ -2347,15 +2583,15 @@
                 </p>
             </div>
 
-            <div class="flex flex-col md:flex-row items-center gap-4">
+            <div class="flex items-center justify-center gap-4">
                 <a href="#"
-                    class="watch-button inline-flex items-center justify-center w-full md:w-auto px-[30px] h-[56px] min-w-[148px] border border-[#1D1D1F] rounded-full text-[17px] text-[#1D1D1F] transition-all duration-300 hover:bg-[#1D1D1F] hover:text-white"
+                    class="watch-button inline-flex items-center justify-center px-[30px] h-[56px] min-w-[148px] border border-[#1D1D1F] rounded-full text-[17px] text-[#1D1D1F] transition-all duration-300 hover:bg-[#1D1D1F] hover:text-white"
                     style="font-family: 'SF Pro Text', sans-serif;">
                     Learn more
                 </a>
 
                 <a href="#"
-                    class="watch-button inline-flex items-center justify-center w-full md:w-auto px-[30px] h-[56px] min-w-[136px] border border-[#1D1D1F] rounded-full text-[17px] text-[#1D1D1F] transition-all duration-300 hover:bg-[#1D1D1F] hover:text-white"
+                    class="watch-button inline-flex items-center justify-center px-[30px] h-[56px] min-w-[136px] border border-[#1D1D1F] rounded-full text-[17px] text-[#1D1D1F] transition-all duration-300 hover:bg-[#1D1D1F] hover:text-white"
                     style="font-family: 'SF Pro Text', sans-serif;">
                     Buy Now
                 </a>
@@ -2370,7 +2606,7 @@
     </section>
 
     <!-- Section: AirPods Hero -->
-    <section class="w-full bg-white py-[28px]">
+    <section class="w-full bg-white pb-[28px]">
         <div class="w-full ">
             <div class="relative w-full h-[80vh] overflow-hidden shadow-sm group">
                 <img src="./imgdrive/airpods4.webp" alt="AirPods 4"
@@ -2379,12 +2615,12 @@
                 <div class="absolute inset-0 flex flex-col items-center justify-end pb-[52px] text-center px-6">
                     <div class="text-white text-[36px] font-semibold leading-tight">AirPods 4</div>
                     <div class="text-white/90 text-[17px] mt-2">Iconic sound. Next-level comfort.</div>
-                    <div class="mt-6 flex flex-col md:flex-row items-center gap-4 w-full md:w-auto px-4 md:px-0">
+                    <div class="mt-6 flex items-center justify-center gap-4 px-4">
                         <a href="#"
-                            class="watch-button inline-flex items-center justify-center w-full md:w-auto px-[30px] h-[48px] border border-white rounded-full text-[15px] text-white hover:bg-white hover:text-black transition-all duration-300">Learn
+                            class="watch-button inline-flex items-center justify-center px-[30px] h-[48px] border border-white rounded-full text-[15px] text-white hover:bg-white hover:text-black transition-all duration-300">Learn
                             more</a>
                         <a href="#"
-                            class="watch-button inline-flex items-center justify-center w-full md:w-auto px-[30px] h-[48px] border border-white rounded-full text-[15px] text-white hover:bg-white hover:text-black transition-all duration-300">Buy</a>
+                            class="watch-button inline-flex items-center justify-center px-[30px] h-[48px] border border-white rounded-full text-[15px] text-white hover:bg-white hover:text-black transition-all duration-300">Buy</a>
                     </div>
                 </div>
             </div>
@@ -2591,8 +2827,68 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-4 m
         </div>
     </section>
 
+    <!-- Section: Customer Gallery / Testimonials -->
+    <section class="py-[80px] bg-white flex flex-col overflow-hidden">
+
+        <!-- Heading and Navigation -->
+        <div class="w-full px-4 md:px-[108px] mb-[40px]">
+            <div class="reveal">
+                <div class="sf-section-eyebrow mb-[12px]">Happy Customers</div>
+                <div class="sf-section-h2 w-full md:w-[695px] max-w-full">
+                    Trusted by thousands of happy customers.
+                </div>
+                <p class="mt-4 text-[16px] text-[#6E6E73] max-w-[600px] reveal reveal-delay-1">
+                    Real stories from real people. See how we've helped bring their devices back to life.
+                </p>
+            </div>
+        </div>
+
+        <!-- Scroll Area -->
+        <div id="customer-scroll-area"
+            class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-4 md:scroll-pl-[108px] pb-[20px]">
+
+            <div id="customer-scroll-container"
+                class="flex w-max gap-[20px] px-4 md:px-[108px] pt-2 reveal reveal-delay-1">
+
+                <div class="min-w-[280px] md:w-[372px] w-[280px] h-[600px] rounded-[24px] overflow-hidden snap-start hover-lift cursor-pointer flex-shrink-0 group shadow-card">
+                    <img src="./new/1.png"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+
+                <div class="min-w-[280px] md:w-[372px] w-[280px] h-[600px] rounded-[24px] overflow-hidden snap-start hover-lift cursor-pointer flex-shrink-0 group shadow-card">
+                    <img src="./new/2.png"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+
+                <div class="min-w-[280px] md:w-[372px] w-[280px] h-[600px] rounded-[24px] overflow-hidden snap-start hover-lift cursor-pointer flex-shrink-0 group shadow-card">
+                    <img src="./new/3.png"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+
+                <div class="min-w-[280px] md:w-[372px] w-[280px] h-[600px] rounded-[24px] overflow-hidden snap-start hover-lift cursor-pointer flex-shrink-0 group shadow-card">
+                    <img src="./new/4.png"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Scroll Buttons -->
+        <div class="w-full flex justify-end gap-[16px] mt-[32px] pr-4 md:pr-[108px]">
+            <button id="customer-scroll-left"
+                class="w-[44px] h-[44px] rounded-full bg-[#F5F5F7] flex items-center justify-center hover:bg-[#E8E8ED] transition">
+                <i data-lucide="chevron-left" class="w-[24px] h-[24px]"></i>
+            </button>
+            <button id="customer-scroll-right"
+                class="w-[44px] h-[44px] rounded-full bg-[#F5F5F7] flex items-center justify-center hover:bg-[#E8E8ED] transition">
+                <i data-lucide="chevron-right" class="w-[24px] h-[24px]"></i>
+            </button>
+        </div>
+
+    </section>
+
     <!-- Section: Device Issues (Help me choose) -->
-    <section class="py-[80px] bg-white flex flex-col items-center w-full">
+    <section class="py-[80px] bg-white flex flex-col items-center w-full broken-section">
         <div class="w-full px-4 md:px-[108px] mb-[40px]">
             <div class="sf-section-h2 w-full md:w-[622px] max-w-full text-center md:text-left text-[32px] md:text-[42.14px] leading-tight md:leading-[60px] reveal">Broken Screen?<br>We've got your back.</div>
         </div>
@@ -2601,43 +2897,37 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-4 m
             <div class="flex flex-col gap-[20px] w-full reveal reveal-delay-1">
                 <!-- Top Big Banner -->
                 <div
-                    class="w-full h-[400px] md:h-[631px] rounded-[24px] relative overflow-hidden bg-black hover-lift cursor-pointer  ">
+                    class="w-full h-[400px] md:h-[631px] rounded-[24px] relative overflow-hidden bg-black hover-lift cursor-pointer broken-banner">
                     <img src="./imgdrive/large.webp"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     <!-- overlay removed to keep image bright -->
-                    <div class="absolute left-4 md:left-[50px] bottom-8 md:bottom-[80px] w-full max-w-full md:w-[537px] max-w-full flex flex-col gap-[24px] z-10">
+                    <div class="absolute left-4 md:left-[50px] bottom-8 md:bottom-[80px] w-full max-w-full md:w-[537px] max-w-full flex flex-col gap-[24px] z-10 broken-content">
                         <h3 class="font-bold text-[24px] md:text-[30.875px] leading-[36px] tracking-[0.128px] text-white w-full md:w-[428px] max-w-full pb-4">
                             Accidents happen. We fix them fast.</h3>
-                        <a href="#" class="btn-primary sf-button-text w-fit">Get an Estimate</a>
+                        <a href="#" class="btn-primary sf-button-text w-fit broken-banner-btn">Get an Estimate</a>
                     </div>
                 </div>
 
                 <!-- Bottom 2 Cards -->
-                <div class="flex flex-col md:flex-row gap-[20px] w-full h-auto">
+                <div class="flex md:flex-row gap-[20px] w-full h-auto">
                     <div
-                        class="w-full md:w-[58%] h-[500px] bg-white rounded-[24px] shadow-card relative overflow-hidden hover-lift cursor-pointer group">
+                        class="w-full md:w-[58%] h-[500px] bg-white rounded-[24px] shadow-card relative overflow-hidden hover-lift cursor-pointer group broken-card">
                         <img src="./imgdrive/large2.webp"
                             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                        <!-- overlay removed to keep image bright -->
-                        <div class="absolute top-8 md:top-[50px] left-4 md:left-[59px] z-10 w-[200px] md:w-[400px]">
-                            <div class="sf-section-eyebrow text-white mb-[8px]">Find Your Store</div>
-                            <p class="sf-service-h3 text-white">Expert service closer than you think.</p>
+                        <div class="absolute left-4 md:left-[59px] bottom-8 md:bottom-[80px] z-10 w-[calc(100%-32px)] md:w-[400px] flex flex-col gap-[24px] broken-card-text">
+                            <div class="sf-section-eyebrow text-white mb-[8px] broken-card-eyebrow">Find Your Store</div>
+                            <p class="sf-service-h3 text-white broken-card-title">Expert service closer than you think.</p>
                         </div>
-                        <a href="#" class="btn-primary sf-button-text absolute bottom-8 md:bottom-[54px] left-4 md:left-[59px] z-10">Walk In
-                            Today</a>
                     </div>
 
                     <div
-                        class="w-full md:w-[42%] h-[500px] bg-white rounded-[24px] shadow-card relative overflow-hidden hover-lift cursor-pointer group">
+                        class="w-full md:w-[42%] h-[500px] bg-white rounded-[24px] shadow-card relative overflow-hidden hover-lift cursor-pointer group broken-card">
                         <img src="./imgdrive/large3.webp"
                             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                        <!-- overlay removed and brightness reset to keep image bright -->
-                        <div class="absolute top-8 md:top-[52px] left-4 md:left-[52px] z-10 max-w-full md:max-w-[300px]">
-                            <div class="sf-section-eyebrow text-white mb-[8px]">Certified professionals</div>
-                            <p class="sf-service-h3 text-white text-[24px] leading-8">Your device in expert hands.</p>
+                        <div class="absolute left-4 md:left-[52px] bottom-8 md:bottom-[80px] z-10 max-w-full md:max-w-[300px] flex flex-col gap-[24px] broken-card-text">
+                            <div class="sf-section-eyebrow text-white mb-[8px] broken-card-eyebrow">Certified professionals</div>
+                            <p class="sf-service-h3 text-white broken-card-title">Your device in expert hands.</p>
                         </div>
-                        <a href="#" class="btn-primary sf-button-text absolute bottom-8 md:bottom-[52px] left-4 md:left-[52px] z-10">Schedule
-                            Now</a>
                     </div>
                 </div>
             </div>
@@ -2645,17 +2935,17 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-4 m
     </section>
 
     <!-- 3 Div Section (Stats) -->
-    <section class="w-full bg-white flex justify-center">
+    <section class="w-full bg-white flex justify-center stats-section">
         <div class="w-full max-w-[1440px] h-auto md:h-[444px] py-12 md:py-0 flex items-center justify-center">
             <div class="flex flex-col md:flex-row items-center justify-between gap-[40px] md:gap-[123px] w-full md:w-full max-w-[1296px]">
 
-                <div class="flex flex-col items-center gap-[10px] w-full md:w-[350px] h-[256.94px] reveal text-center">
+                <div class="flex flex-col items-center gap-[10px] w-full md:w-[350px] md:h-[256.94px] reveal text-center stats-item">
                     <div
-                        class="w-[40px] h-[44px] rounded-full bg-gradient-to-br from-apple-blue/10 to-apple-blueLight/10 flex items-center justify-center mb-[6px]">
+                        class="w-[40px] h-[44px] rounded-full bg-gradient-to-br from-apple-blue/10 to-apple-blueLight/10 flex items-center justify-center mb-[6px] stats-icon">
                         <i data-lucide="wrench" class="w-6 h-6 text-apple-blue stroke-[1.5]"></i>
                     </div>
                     <p class="sf-stats-h3" style="max-width: 100%;">5,000+ Devices Restored.</p>
-                    <div class="w-full md:w-[350px] h-[120.94px] flex items-center justify-center">
+                    <div class="w-full md:w-[350px] md:h-[120.94px] flex items-center justify-center stats-desc">
                         <p class="sf-stats-p" style="max-width: 100%;">We've breathed new life into thousands of iPhones,
                             Macs, and iPads.</p>
                     </div>
@@ -2665,13 +2955,13 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-4 m
                 </div>
 
                 <div
-                    class="flex flex-col items-center gap-[10px] w-full md:w-[350px] h-[256.94px] reveal reveal-delay-1 text-center">
+                    class="flex flex-col items-center gap-[10px] w-full md:w-[350px] md:h-[256.94px] reveal reveal-delay-1 text-center stats-item">
                     <div
-                        class="w-[40px] h-[44px] rounded-full bg-gradient-to-br from-apple-blue/10 to-apple-blueLight/10 flex items-center justify-center mb-[6px]">
+                        class="w-[40px] h-[44px] rounded-full bg-gradient-to-br from-apple-blue/10 to-apple-blueLight/10 flex items-center justify-center mb-[6px] stats-icon">
                         <i data-lucide="shield-check" class="w-6 h-6 text-apple-blue stroke-[1.5]"></i>
                     </div>
                     <p class="sf-stats-h3 sf-stats-h3-wide" style="max-width: 100%;">100% Genuine Inventory.</p>
-                    <div class="w-full md:w-[350px] h-[120.94px] flex items-center justify-center">
+                    <div class="w-full md:w-[350px] md:h-[120.94px] flex items-center justify-center stats-desc">
                         <p class="sf-stats-p" style="max-width: 100%;">Every screen, battery, and chip comes directly from
                             Apple. Authenticity you can trust, performance you can feel.</p>
                     </div>
@@ -2681,13 +2971,13 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-4 m
                 </div>
 
                 <div
-                    class="flex flex-col items-center gap-[10px] w-full md:w-[350px] h-[256.94px] reveal reveal-delay-2 text-center">
+                    class="flex flex-col items-center gap-[10px] w-full md:w-[350px] md:h-[256.94px] reveal reveal-delay-2 text-center stats-item">
                     <div
-                        class="w-[40px] h-[44px] rounded-full bg-gradient-to-br from-apple-blue/10 to-apple-blueLight/10 flex items-center justify-center mb-[6px]">
+                        class="w-[40px] h-[44px] rounded-full bg-gradient-to-br from-apple-blue/10 to-apple-blueLight/10 flex items-center justify-center mb-[6px] stats-icon">
                         <i data-lucide="map-pin" class="w-6 h-6 text-apple-blue stroke-[1.5]"></i>
                     </div>
                     <p class="sf-stats-h3 sf-stats-h3-wide" style="max-width: 100%;">5 Convenient Locations.</p>
-                    <div class="w-full md:w-[350px] h-[120.94px] flex items-center justify-center">
+                    <div class="w-full md:w-[350px] md:h-[120.94px] flex items-center justify-center stats-desc">
                         <p class="sf-stats-p" style="max-width: 100%;">Expert service is closer than you think. Walk in with
                             a problem, walk out with peace of mind.</p>
                     </div>
@@ -2702,27 +2992,29 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-4 m
 
     <!-- Section: Portal & Service Updates -->
     <section
-        class="py-[80px] bg-white flex flex-col items-center justify-center relative overflow-hidden border-b border-[#E5E5E7]">
+        class="py-[80px] bg-white flex flex-col items-center justify-center relative overflow-hidden border-b border-[#E5E5E7] portal-section">
         <div class="w-full max-w-[800px] px-4 flex flex-col items-center gap-[48px] reveal">
             <div class="flex flex-col items-center gap-[20px]">
                 <div class="text-center">
                     <div
+                        class="portal-title"
                         style="font-size: clamp(20px, 4vw, 28px); font-weight: 600; line-height: 1.3; letter-spacing: -0.28px; color: #1D1D1F; margin-bottom: 4px;">
                         Waiting on a miracle?
                     </div>
                     <div
+                        class="portal-title"
                         style="font-size: clamp(20px, 4vw, 28px); font-weight: 600; line-height: 1.3; letter-spacing: -0.28px; color: #1D1D1F;">
                         We're working on it.
                     </div>
                 </div>
-                <p
+                <p class="portal-desc"
                     style="font-size: 15px; font-weight: 400; line-height: 1.6; letter-spacing: 0.24px; color: #424245; text-align: center; max-width: 680px;">
                     Your device is currently in the hands of experts who care as much as you do. You don't need to
                     wonder what's happening. Log in to your personal portal to see exactly where we are in the process
                     from diagnosis to the final polish.
                 </p>
             </div>
-            <div class="flex flex-row items-center justify-center flex-col md:flex-row gap-6 md:gap-[64px]">
+            <div class="flex flex-row items-center justify-center md:flex-row gap-6 md:gap-[64px] portal-links">
                 <a href="#"
                     style="color: #0071E3; text-decoration: none; font-size: 15px; font-weight: 500; letter-spacing: -0.24px; transition: opacity 0.2s;"
                     class="hover:opacity-80">
@@ -2741,7 +3033,7 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-4 m
     <footer class="bg-white pt-[50px] pb-[20px] px-[1rem] border-t border-[#d5d5d7]">
         <div class="max-w-[1280px] mx-auto px-[1rem]">
             <!-- Footer Content Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-8 md:gap-12 mb-[64px]">
+            <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-8 md:gap-12 mb-[64px]">
                 <!-- Shop and Learn -->
                 <div class="flex flex-col gap-[16px]">
                     <h4

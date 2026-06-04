@@ -9,10 +9,25 @@ document.addEventListener('DOMContentLoaded', () => {
     let heroIntervalId = null;
     const slideInterval = 5000;
 
+    const isMobile = () => window.innerWidth < 768;
+    const skipSlidesOnMobile = () => {
+        const indices = [];
+        slides.forEach((s, i) => {
+            if (s.dataset.heroIndex === '0') indices.push(i);
+        });
+        return indices;
+    };
+
     function showSlide(index) {
         if (!slides.length) return;
 
         currentSlide = (index + slides.length) % slides.length;
+
+        // Skip slide 0 on mobile
+        if (isMobile() && skipSlidesOnMobile().includes(currentSlide)) {
+            showSlide(currentSlide + 1);
+            return;
+        }
 
         slides.forEach((slide, i) => {
             slide.classList.toggle('active', i === currentSlide);
@@ -21,7 +36,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function nextSlide() {
-        showSlide(currentSlide + 1);
+        let next = currentSlide + 1;
+        if (isMobile() && skipSlidesOnMobile().includes(next % slides.length)) {
+            next++;
+        }
+        showSlide(next);
     }
 
     function startHeroAutoplay() {
@@ -79,6 +98,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
         serviceScrollContainer.addEventListener('scroll', updateButtonStates);
         updateButtonStates(); // Initial state
+    }
+
+    // Customer Gallery Scroll Functionality
+    const customerScrollContainer = document.getElementById('customer-scroll-area') || document.getElementById('customer-scroll-container');
+    const customerScrollLeft = document.getElementById('customer-scroll-left');
+    const customerScrollRight = document.getElementById('customer-scroll-right');
+
+    if (customerScrollContainer && customerScrollLeft && customerScrollRight) {
+        const scrollAmount = window.innerWidth < 768 ? 300 : 392;
+
+        customerScrollLeft.addEventListener('click', () => {
+            customerScrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+
+        customerScrollRight.addEventListener('click', () => {
+            customerScrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+
+        const updateCustomerButtons = () => {
+            const isAtStart = customerScrollContainer.scrollLeft <= 0;
+            const isAtEnd = customerScrollContainer.scrollLeft >=
+                (customerScrollContainer.scrollWidth - customerScrollContainer.clientWidth - 10);
+
+            customerScrollLeft.style.opacity = isAtStart ? '0.5' : '1';
+            customerScrollLeft.style.pointerEvents = isAtStart ? 'none' : 'auto';
+            customerScrollRight.style.opacity = isAtEnd ? '0.5' : '1';
+            customerScrollRight.style.pointerEvents = isAtEnd ? 'none' : 'auto';
+        };
+
+        customerScrollContainer.addEventListener('scroll', updateCustomerButtons);
+        updateCustomerButtons();
     }
 
     // Note: Mega Menu Hover Functionality is now handled in index.html inline script
