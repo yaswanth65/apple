@@ -310,6 +310,12 @@
                 max-height: 220px !important;
             }
 
+            .broken-section div[class*="h-\[350px\]"] img {
+                max-height: none !important;
+                width: 100% !important;
+                height: 100% !important;
+            }
+
             /* Section padding */
             section[class*="py-\[80px\]"] {
                 padding-top: 40px !important;
@@ -367,6 +373,38 @@
             .relative.mt-12 {
                 margin-top: 24px !important;
             }
+
+            /* Watch section mobile height */
+            section.relative.w-full.min-h-screen {
+                height: auto !important;
+                min-height: auto !important;
+                overflow: hidden !important;
+                padding-bottom: 0 !important;
+            }
+            section.relative.w-full.min-h-screen .relative.mt-12 {
+                margin-top: 0 !important;
+            }
+            section.relative.w-full.min-h-screen .relative.mt-12 img {
+                max-height: 400px !important;
+                object-fit: contain !important;
+            }
+            section.relative.w-full.min-h-screen .z-10 {
+                padding: 40px 16px 24px !important;
+                gap: 32px !important;
+            }
+
+            /* AirPods section mobile height */
+            div[class*="h-\[80vh\]"] {
+                height: 75vh !important;
+            }
+            div[class*="h-\[80vh\]"] img {
+                object-fit: cover !important;
+            }
+
+            /* Reduce product card width in Designed to be loved */
+            .product-card {
+                width: 240px !important;
+            }
         }
 
         @media (max-width: 640px) {
@@ -414,8 +452,8 @@
             }
 
             .product-card {
-                width: 100% !important;
-                max-width: 340px !important;
+                width: 210px !important;
+                max-width: 210px !important;
                 margin: 0 auto !important;
             }
 
@@ -499,8 +537,8 @@
             }
 
             .product-card {
-                width: calc(100vw - 16px) !important;
-                max-width: 280px !important;
+                width: 200px !important;
+                max-width: 200px !important;
                 margin: 0 auto !important;
             }
 
@@ -1496,6 +1534,12 @@
                 width: auto !important;
             }
 
+            .broken-section div[class*="h-\[350px\]"] img {
+                max-height: none !important;
+                width: 100% !important;
+                height: 100% !important;
+            }
+
             /* Padding adjustments */
             div[class*="px-4"][class*="px-\[108px\]"],
             div[class*="md:px-\[108px\]"] {
@@ -1538,6 +1582,40 @@
                 margin-top: 24px !important;
             }
 
+            /* Watch section mobile height */
+            section.relative.w-full.min-h-screen {
+                height: auto !important;
+                min-height: auto !important;
+                overflow: hidden !important;
+                padding-bottom: 0 !important;
+            }
+            section.relative.w-full.min-h-screen .relative.mt-12 {
+                margin-top: 0 !important;
+            }
+            section.relative.w-full.min-h-screen .relative.mt-12 img {
+                max-height: 400px !important;
+                object-fit: contain !important;
+            }
+            section.relative.w-full.min-h-screen .z-10 {
+                padding: 40px 16px 24px !important;
+                gap: 32px !important;
+            }
+
+            /* AirPods section mobile height */
+            div[class*="h-\[80vh\]"] {
+                height: 75vh !important;
+            }
+            div[class*="h-\[80vh\]"] img {
+                object-fit: cover !important;
+            }
+
+            /* Reduce product card width */
+            .product-card {
+                width: 220px !important;
+                max-width: 220px !important;
+                margin: 0 auto !important;
+            }
+
             /* Button sizing */
             div[class*="h-\[56px\]"],
             a[class*="h-\[56px\]"],
@@ -1546,7 +1624,7 @@
             }
 
             div[class*="h-\[80vh\]"] {
-                height: 60vh !important;
+                height: 75vh !important;
             }
 
             /* Section padding */
@@ -1650,8 +1728,8 @@
             }
 
             .product-card {
-                width: 100% !important;
-                max-width: 320px !important;
+                width: 210px !important;
+                max-width: 210px !important;
             }
 
             /* Container max width */
@@ -1712,8 +1790,8 @@
             }
 
             .product-card {
-                width: calc(100vw - 16px) !important;
-                max-width: 300px !important;
+                width: 200px !important;
+                max-width: 200px !important;
             }
 
             section[class*="py-\[80px\]"] {
@@ -1809,6 +1887,22 @@
             }
             .sf-card-price {
                 font-size: 12px !important;
+            }
+        }
+
+        /* Broken section desktop layout */
+        @media (min-width: 769px) {
+            .broken-section .broken-banner {
+                width: 100% !important;
+                flex: 0 0 100% !important;
+            }
+            .broken-section .broken-card {
+                flex: 0 0 calc(50% - 10px) !important;
+                max-width: calc(50% - 10px) !important;
+            }
+            .broken-section .flex.gap-\[20px\] {
+                flex-wrap: wrap !important;
+                flex-direction: row !important;
             }
         }
 
@@ -2895,12 +2989,11 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-4 m
 
         <div class="w-full px-4 md:px-[108px]">
             <div class="flex flex-col gap-[20px] w-full reveal reveal-delay-1">
-                <!-- Top Big Banner -->
+                <!-- Card 1 -->
                 <div
-                    class="w-full h-[400px] md:h-[631px] rounded-[24px] relative overflow-hidden bg-black hover-lift cursor-pointer broken-banner">
+                    class="w-full h-[350px] md:h-[631px] rounded-[24px] relative overflow-hidden bg-black hover-lift cursor-pointer broken-banner">
                     <img src="./imgdrive/large.webp"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                    <!-- overlay removed to keep image bright -->
                     <div class="absolute left-4 md:left-[50px] bottom-8 md:bottom-[80px] w-full max-w-full md:w-[537px] max-w-full flex flex-col gap-[24px] z-10 broken-content">
                         <h3 class="font-bold text-[24px] md:text-[30.875px] leading-[36px] tracking-[0.128px] text-white w-full md:w-[428px] max-w-full pb-4">
                             Accidents happen. We fix them fast.</h3>
@@ -2908,26 +3001,25 @@ class="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-pl-4 m
                     </div>
                 </div>
 
-                <!-- Bottom 2 Cards -->
-                <div class="flex md:flex-row gap-[20px] w-full h-auto">
-                    <div
-                        class="w-full md:w-[58%] h-[500px] bg-white rounded-[24px] shadow-card relative overflow-hidden hover-lift cursor-pointer group broken-card">
-                        <img src="./imgdrive/large2.webp"
-                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                        <div class="absolute left-4 md:left-[59px] bottom-8 md:bottom-[80px] z-10 w-[calc(100%-32px)] md:w-[400px] flex flex-col gap-[24px] broken-card-text">
-                            <div class="sf-section-eyebrow text-white mb-[8px] broken-card-eyebrow">Find Your Store</div>
-                            <p class="sf-service-h3 text-white broken-card-title">Expert service closer than you think.</p>
-                        </div>
+                <!-- Card 2 -->
+                <div
+                    class="w-full h-[350px] md:h-[500px] rounded-[24px] relative overflow-hidden hover-lift cursor-pointer group bg-black broken-card">
+                    <img src="./imgdrive/large2.webp"
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute left-4 md:left-[59px] bottom-8 md:bottom-[80px] z-10 w-[calc(100%-32px)] md:w-[400px] flex flex-col gap-[24px] broken-card-text">
+                        <div class="sf-section-eyebrow text-white mb-[8px] broken-card-eyebrow">Find Your Store</div>
+                        <p class="sf-service-h3 text-white broken-card-title">Expert service closer than you think.</p>
                     </div>
+                </div>
 
-                    <div
-                        class="w-full md:w-[42%] h-[500px] bg-white rounded-[24px] shadow-card relative overflow-hidden hover-lift cursor-pointer group broken-card">
-                        <img src="./imgdrive/large3.webp"
-                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                        <div class="absolute left-4 md:left-[52px] bottom-8 md:bottom-[80px] z-10 max-w-full md:max-w-[300px] flex flex-col gap-[24px] broken-card-text">
-                            <div class="sf-section-eyebrow text-white mb-[8px] broken-card-eyebrow">Certified professionals</div>
-                            <p class="sf-service-h3 text-white broken-card-title">Your device in expert hands.</p>
-                        </div>
+                <!-- Card 3 -->
+                <div
+                    class="w-full h-[350px] md:h-[500px] rounded-[24px] relative overflow-hidden hover-lift cursor-pointer group bg-black broken-card">
+                    <img src="./imgdrive/large3.webp"
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute left-4 md:left-[52px] bottom-8 md:bottom-[80px] z-10 max-w-full md:max-w-[300px] flex flex-col gap-[24px] broken-card-text">
+                        <div class="sf-section-eyebrow text-white mb-[8px] broken-card-eyebrow">Certified professionals</div>
+                        <p class="sf-service-h3 text-white broken-card-title">Your device in expert hands.</p>
                     </div>
                 </div>
             </div>
